@@ -110,6 +110,80 @@
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787689252547
       }
+    ],
+    "2.2 Create D1 SQL migration with FTS5 virtual table and sync triggers": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787689271806
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690519576
+      }
+    ],
+    "2.3 Create typed query helper functions": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787689272556
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690520583
+      }
+    ],
+    "5.2 Implement Devpost source adapter": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787689273432
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690521550
+      }
+    ],
+    "5.3 Implement MLH source adapter": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787689274200
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690522425
+      }
+    ],
+    "5.4 Implement HackerEarth source adapter": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787689275039
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690523276
+      }
+    ],
+    "2. Database schema and migrations": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690520635
+      }
+    ],
+    "5. Source adapters (Aggregation Worker)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787690523326
+      }
     ]
   }
 }

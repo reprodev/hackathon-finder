@@ -34,21 +34,21 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Create test directory structure: `tests/unit/`, `tests/property/`, `tests/integration/`, `tests/e2e/`
     - _Requirements: 7.1_
 
-- [ ] 2. Database schema and migrations
+- [x] 2. Database schema and migrations
   - [x] 2.1 Create Drizzle schema for hackathons, aggregation_logs, and refresh_metadata tables
     - Define `src/lib/db/schema.ts` with all tables, columns, indexes per design
     - Include deduplication unique index on (title, start_date)
     - Include indexes on start_date and format columns
     - _Requirements: 1.2, 1.5, 1.6_
 
-  - [ ] 2.2 Create D1 SQL migration with FTS5 virtual table and sync triggers
+  - [x] 2.2 Create D1 SQL migration with FTS5 virtual table and sync triggers
     - Write `src/lib/db/migrations/0001_create_tables.sql` with all CREATE TABLE statements
     - Create FTS5 virtual table `hackathon_fts` with porter tokenizer and unicode61
     - Create AFTER INSERT, UPDATE, DELETE triggers to keep FTS5 in sync
     - Create aggregation_logs and refresh_metadata tables
     - _Requirements: 1.2, 1.5, 2.1, 2.3_
 
-  - [ ] 2.3 Create typed query helper functions
+  - [x] 2.3 Create typed query helper functions
     - Write `src/lib/db/queries.ts` with Drizzle-based typed queries for CRUD operations
     - Include functions: `getHackathons`, `getHackathonBySlug`, `upsertHackathon`, `getAggregationLogs`, `updateRefreshMetadata`
     - _Requirements: 1.2, 1.5, 1.6_
@@ -67,26 +67,26 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Handle special characters, Unicode, and potential collisions
     - _Requirements: 5.3_
 
-- [ ] 5. Source adapters (Aggregation Worker)
+- [x] 5. Source adapters (Aggregation Worker)
   - [x] 5.1 Create source adapter interface and base types
     - Write `workers/aggregator/adapters/interface.ts` with `EventSourceAdapter` and `RawHackathonEvent` interfaces
     - _Requirements: 1.1, 1.4_
 
-  - [ ] 5.2 Implement Devpost source adapter
+  - [x] 5.2 Implement Devpost source adapter
     - Write `workers/aggregator/adapters/devpost.ts` implementing `EventSourceAdapter`
     - Fetch hackathon data from Devpost structured endpoints
     - Map Devpost-specific fields to `RawHackathonEvent`
     - Implement `healthCheck()` method
     - _Requirements: 1.1, 1.4_
 
-  - [ ] 5.3 Implement MLH source adapter
+  - [x] 5.3 Implement MLH source adapter
     - Write `workers/aggregator/adapters/mlh.ts` implementing `EventSourceAdapter`
     - Scrape MLH events page HTML for hackathon data
     - Map MLH-specific fields to `RawHackathonEvent`
     - Implement `healthCheck()` method
     - _Requirements: 1.1, 1.4_
 
-  - [ ] 5.4 Implement HackerEarth source adapter
+  - [x] 5.4 Implement HackerEarth source adapter
     - Write `workers/aggregator/adapters/hackerearth.ts` implementing `EventSourceAdapter`
     - Scrape HackerEarth challenge listings HTML
     - Map HackerEarth-specific fields to `RawHackathonEvent`

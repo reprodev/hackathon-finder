@@ -1,0 +1,7 @@
+name = "hackathon-discovery"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hackathon-discovery-db"
+database_id = "<your-d1-database-id>"

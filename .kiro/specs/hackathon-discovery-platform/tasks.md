@@ -6,7 +6,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 
 ## Tasks
 
-- [ ] 1. Project scaffolding and configuration
+- [x] 1. Project scaffolding and configuration
   - [x] 1.1 Initialize Astro project with Cloudflare adapter, React integration, and Tailwind CSS
     - Run `npm create astro` with TypeScript strict mode
     - Install and configure `@astrojs/cloudflare`, `@astrojs/react`, `@astrojs/tailwind`
@@ -21,13 +21,13 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Create directory structure: `src/pages/`, `src/components/`, `src/lib/db/`, `src/lib/`, `src/layouts/`, `workers/aggregator/adapters/`
     - _Requirements: 7.1_
 
-  - [ ] 1.3 Configure wrangler.toml for Pages project and Aggregation Worker
+  - [x] 1.3 Configure wrangler.toml for Pages project and Aggregation Worker
     - Create root `wrangler.toml` with D1 database binding
     - Create `workers/aggregator/wrangler.toml` with D1 binding and cron trigger (`0 * * * *`)
     - Add environment variables for source enable/disable flags and refresh interval
     - _Requirements: 7.1, 7.2, 1.3_
 
-  - [ ] 1.4 Set up testing infrastructure (Vitest + fast-check + Playwright)
+  - [x] 1.4 Set up testing infrastructure (Vitest + fast-check + Playwright)
     - Install `vitest`, `@cloudflare/vitest-pool-workers`, `fast-check`, `@playwright/test`
     - Create `vitest.config.ts` with Cloudflare Workers pool configuration
     - Create `playwright.config.ts` for E2E tests

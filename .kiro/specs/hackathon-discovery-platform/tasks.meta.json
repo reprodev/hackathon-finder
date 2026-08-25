@@ -24,6 +24,37 @@
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787684041368
       }
+    ],
+    "1.3 Configure wrangler.toml for Pages project and Aggregation Worker": [
+      {
+        "executionId": "b26acd44-d3ab-4d85-8720-0206b80e9e4b",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787684055515
+      },
+      {
+        "executionId": "b26acd44-d3ab-4d85-8720-0206b80e9e4b",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787688054738
+      }
+    ],
+    "1.4 Set up testing infrastructure (Vitest + fast-check + Playwright)": [
+      {
+        "executionId": "b26acd44-d3ab-4d85-8720-0206b80e9e4b",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787684056457
+      },
+      {
+        "executionId": "b26acd44-d3ab-4d85-8720-0206b80e9e4b",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787688055506
+      }
+    ],
+    "1. Project scaffolding and configuration": [
+      {
+        "executionId": "b26acd44-d3ab-4d85-8720-0206b80e9e4b",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787688055666
+      }
     ]
   }
 }

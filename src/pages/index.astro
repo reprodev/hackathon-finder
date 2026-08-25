@@ -1,19 +1,24 @@
 ---
-import "../styles/global.css";
+import Base from "../layouts/Base.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hackathon Discovery Platform</title>
-    <meta name="description" content="Discover hackathons from multiple sources - Devpost, MLH, HackerEarth and more." />
-  </head>
-  <body class="min-h-screen bg-white text-gray-900">
-    <main class="max-w-7xl mx-auto px-4 py-8">
-      <h1 class="text-4xl font-bold">Hackathon Discovery Platform</h1>
-      <p class="mt-4 text-lg text-gray-600">Find your next hackathon from multiple sources.</p>
-    </main>
-  </body>
-</html>
+<Base title="HackathonHub - Discover Hackathons Worldwide">
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+      Discover Your Next
+      <span class="text-indigo-400">Hackathon</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-gray-400">
+      Find hackathons from Devpost, MLH, HackerEarth and more — all in one place.
+      Search, filter, and never miss an opportunity to build something great.
+    </p>
+    <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+      <a
+        href="/hackathons"
+        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors"
+      >
+        Browse Hackathons
+      </a>
+    </div>
+  </section>
+</Base>

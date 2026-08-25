@@ -245,41 +245,41 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 - [x] 12. Checkpoint - Ensure API routes return correct data
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 13. UI components (React islands)
-  - [~] 13.1 Create base Astro layout with semantic HTML structure
+- [x] 13. UI components (React islands)
+  - [x] 13.1 Create base Astro layout with semantic HTML structure
     - Write `src/layouts/Base.astro` with HTML boilerplate, nav, main, footer landmarks
     - Include h1 heading, proper semantic elements
     - Set up Tailwind responsive breakpoints
     - _Requirements: 6.1, 8.4_
 
-  - [~] 13.2 Implement SearchBar React component
+  - [x] 13.2 Implement SearchBar React component
     - Write `src/components/SearchBar.tsx` as a React island (`client:load`)
     - Debounced input (300ms) with minimum 2-char threshold
     - Emit search query changes to parent/state
     - Show error state when search is unavailable
     - _Requirements: 2.1, 2.2, 6.2_
 
-  - [~] 13.3 Implement FilterPanel React component
+  - [x] 13.3 Implement FilterPanel React component
     - Write `src/components/FilterPanel.tsx` as a React island (`client:visible`)
     - Include DateRangeFilter (presets + custom), FormatFilter, TagFilter sub-components
     - Implement clear-all functionality
     - Show validation error for invalid date ranges
     - _Requirements: 3.1, 3.2, 3.4, 3.5, 6.2_
 
-  - [~] 13.4 Implement HackathonCard component with truncation rules
+  - [x] 13.4 Implement HackathonCard component with truncation rules
     - Write `src/components/HackathonCard.tsx`
     - Display title (truncated to 80 chars with ellipsis), start/end dates, format badge, up to 3 tags, organizer
     - Link to detail page via slug
     - Responsive card layout
     - _Requirements: 4.2, 4.1_
 
-  - [ ]* 13.5 Write property test for card display truncation rules (Property 13)
+  - [x]* 13.5 Write property test for card display truncation rules (Property 13)
     - **Property 13: Card display truncation rules**
     - Generate random hackathons with title lengths 0-300 and tag counts 0-20
     - Verify title truncated to <=80 chars with ellipsis if original exceeds 80, and max 3 tags displayed
     - **Validates: Requirements 4.2**
 
-  - [~] 13.6 Implement HackathonGrid with infinite scroll
+  - [x] 13.6 Implement HackathonGrid with infinite scroll
     - Write `src/components/HackathonGrid.tsx` and `src/components/InfiniteScroll.tsx`
     - Fetch from `/api/hackathons` with pagination
     - Append next batch (12 items) on scroll-to-bottom
@@ -288,7 +288,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Show "no results" message when empty
     - _Requirements: 4.1, 4.3, 4.5, 4.6, 4.7, 6.4, 6.5_
 
-  - [~] 13.7 Implement LoadingSkeleton Astro component
+  - [x] 13.7 Implement LoadingSkeleton Astro component
     - Write `src/components/LoadingSkeleton.astro` with animated placeholders matching card dimensions
     - _Requirements: 6.4_
 

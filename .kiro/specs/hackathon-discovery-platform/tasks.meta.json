@@ -279,6 +279,16 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787690766880
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787691425879
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692668359
       }
     ],
     "10.1 Implement filter composition engine": [
@@ -286,6 +296,16 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787690766912
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787691426700
+      },
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692669135
       }
     ],
     "11.1 Implement GET /api/hackathons endpoint": [
@@ -503,6 +523,69 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787691411480
+      }
+    ],
+    "9. Search engine (FTS5 with BM25 ranking)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692668445
+      }
+    ],
+    "10. Filter logic": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692669167
+      }
+    ],
+    "9.2 Write property test for search substring matching (Property 6)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692670478
+      }
+    ],
+    "9.3 Write property test for short query returns full dataset (Property 7)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692671420
+      }
+    ],
+    "9.4 Write property test for search ranking priority (Property 8)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692672351
+      }
+    ],
+    "10.2 Write property test for filter AND/OR logic (Property 9)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692673387
+      }
+    ],
+    "10.3 Write property test for search and filter composition (Property 10)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692674296
+      }
+    ],
+    "10.4 Write property test for filter reset restores full dataset (Property 11)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692675352
+      }
+    ],
+    "10.5 Write property test for invalid date range rejection (Property 12)": [
+      {
+        "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787692676351
       }
     ]
   }

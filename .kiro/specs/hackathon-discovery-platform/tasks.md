@@ -155,8 +155,8 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 - [x] 8. Checkpoint - Ensure aggregation pipeline works end-to-end
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Search engine (FTS5 with BM25 ranking)
-  - [~] 9.1 Implement FTS5 search logic with BM25 ranking
+- [x] 9. Search engine (FTS5 with BM25 ranking)
+  - [x] 9.1 Implement FTS5 search logic with BM25 ranking
     - Write `src/lib/search.ts` implementing `SearchEngine` interface
     - Build FTS5 MATCH queries with BM25 column weights (title=10, tags=5, description=1)
     - Handle queries < 2 chars by returning full dataset
@@ -164,51 +164,51 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Support pagination in search results
     - _Requirements: 2.1, 2.2, 2.3_
 
-  - [ ]* 9.2 Write property test for search substring matching (Property 6)
+  - [x]* 9.2 Write property test for search substring matching (Property 6)
     - **Property 6: Search substring matching**
     - Generate random queries (2-200 chars) and hackathon datasets
     - Verify every result contains the query as case-insensitive substring in title, description, or tags
     - **Validates: Requirements 2.1**
 
-  - [ ]* 9.3 Write property test for short query returns full dataset (Property 7)
+  - [x]* 9.3 Write property test for short query returns full dataset (Property 7)
     - **Property 7: Short query returns full dataset**
     - Generate random 0-1 char strings and hackathon datasets
     - Verify result set equals the complete unfiltered dataset
     - **Validates: Requirements 2.2**
 
-  - [ ]* 9.4 Write property test for search ranking priority (Property 8)
+  - [x]* 9.4 Write property test for search ranking priority (Property 8)
     - **Property 8: Search ranking priority**
     - Generate datasets with controlled match locations (title-only, tag-only, desc-only)
     - Verify title matches appear before tag matches, which appear before description matches
     - **Validates: Requirements 2.3**
 
-- [ ] 10. Filter logic
-  - [~] 10.1 Implement filter composition engine
+- [x] 10. Filter logic
+  - [x] 10.1 Implement filter composition engine
     - Write `src/lib/filters.ts` with filter logic for date range, format, and tags
     - Implement AND logic across filter types, OR logic within filter types
     - Implement date range presets (upcoming, this week, this month, custom)
     - Validate custom date ranges (start <= end)
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
-  - [ ]* 10.2 Write property test for filter AND/OR logic (Property 9)
+  - [x]* 10.2 Write property test for filter AND/OR logic (Property 9)
     - **Property 9: Filter AND/OR logic**
     - Generate random filter combinations and hackathon datasets
     - Verify results satisfy ALL filter types (AND) and at least one value within each type (OR)
     - **Validates: Requirements 3.2**
 
-  - [ ]* 10.3 Write property test for search and filter composition (Property 10)
+  - [x]* 10.3 Write property test for search and filter composition (Property 10)
     - **Property 10: Search and filter composition**
     - Generate random queries + filters + datasets
     - Verify result equals intersection of search-only results and filter-only results
     - **Validates: Requirements 3.3**
 
-  - [ ]* 10.4 Write property test for filter reset restores full dataset (Property 11)
+  - [x]* 10.4 Write property test for filter reset restores full dataset (Property 11)
     - **Property 11: Filter reset restores full dataset**
     - Generate random datasets with random prior filter state
     - Verify clearing all filters and search produces complete dataset
     - **Validates: Requirements 3.4**
 
-  - [ ]* 10.5 Write property test for invalid date range rejection (Property 12)
+  - [x]* 10.5 Write property test for invalid date range rejection (Property 12)
     - **Property 12: Invalid date range rejection**
     - Generate random date pairs (both valid and invalid orderings)
     - Verify rejection when start > end, acceptance otherwise

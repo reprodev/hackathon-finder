@@ -53,7 +53,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Include functions: `getHackathons`, `getHackathonBySlug`, `upsertHackathon`, `getAggregationLogs`, `updateRefreshMetadata`
     - _Requirements: 1.2, 1.5, 1.6_
 
-- [ ] 3. Checkpoint - Ensure project builds and migrations are valid
+- [x] 3. Checkpoint - Ensure project builds and migrations are valid
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 4. Shared types and utilities
@@ -93,7 +93,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Implement `healthCheck()` method
     - _Requirements: 1.1, 1.4_
 
-  - [ ]* 5.5 Write property test for partial-failure resilience (Property 3)
+  - [x]* 5.5 Write property test for partial-failure resilience (Property 3)
     - **Property 3: Resilient partial-failure fetching**
     - Generate random non-empty subsets of failing adapters while keeping at least one healthy
     - Verify aggregator stores data from healthy sources and logs failures
@@ -107,7 +107,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Detect format (virtual/in_person/hybrid) from location data
     - _Requirements: 1.2_
 
-  - [ ]* 6.2 Write property test for normalization schema conformance (Property 1)
+  - [x]* 6.2 Write property test for normalization schema conformance (Property 1)
     - **Property 1: Normalization schema conformance**
     - Generate random `RawHackathonEvent` with variable field lengths (0-500 char titles, 0-10000 char descriptions, 0-50 tags)
     - Verify output always conforms to schema constraints
@@ -119,14 +119,14 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Merge records from different sources preserving information from both
     - _Requirements: 1.6_
 
-  - [ ]* 6.4 Write property test for deduplication merge correctness (Property 5)
+  - [x]* 6.4 Write property test for deduplication merge correctness (Property 5)
     - **Property 5: Deduplication merge correctness**
     - Generate pairs of events with matching title+startDate from different sources
     - Verify exactly one merged record is produced preserving data from both
     - **Validates: Requirements 1.6**
 
-- [ ] 7. Aggregation Worker with Cron Trigger
-  - [ ] 7.1 Implement aggregation worker scheduled handler
+- [x] 7. Aggregation Worker with Cron Trigger
+  - [x] 7.1 Implement aggregation worker scheduled handler
     - Write `workers/aggregator/index.ts` with `scheduled()` event handler
     - Orchestrate: fetch from enabled sources → normalize → deduplicate → upsert to D1
     - Implement error handling per source (continue on individual failure)
@@ -134,29 +134,29 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Log aggregation results to aggregation_logs table
     - _Requirements: 1.1, 1.3, 1.4, 1.7_
 
-  - [ ] 7.2 Implement refresh interval validation and cache staleness logic
+  - [x] 7.2 Implement refresh interval validation and cache staleness logic
     - Validate configurable interval >= 15 minutes
     - Implement staleness check: stale if currentTime > lastRefresh + (2 × interval)
     - Store interval in refresh_metadata
     - _Requirements: 1.3, 1.5_
 
-  - [ ]* 7.3 Write property test for refresh interval validation (Property 2)
+  - [x]* 7.3 Write property test for refresh interval validation (Property 2)
     - **Property 2: Refresh interval validation**
     - Generate random integers (0-1440) as interval values
     - Verify acceptance if >= 15, rejection if < 15
     - **Validates: Requirements 1.3**
 
-  - [ ]* 7.4 Write property test for cache staleness calculation (Property 4)
+  - [x]* 7.4 Write property test for cache staleness calculation (Property 4)
     - **Property 4: Cache staleness calculation**
     - Generate random (lastRefreshTimestamp, interval>=15, currentTime) tuples
     - Verify staleness iff currentTime > lastRefresh + (2 × interval)
     - **Validates: Requirements 1.5**
 
-- [ ] 8. Checkpoint - Ensure aggregation pipeline works end-to-end
+- [x] 8. Checkpoint - Ensure aggregation pipeline works end-to-end
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 9. Search engine (FTS5 with BM25 ranking)
-  - [ ] 9.1 Implement FTS5 search logic with BM25 ranking
+  - [~] 9.1 Implement FTS5 search logic with BM25 ranking
     - Write `src/lib/search.ts` implementing `SearchEngine` interface
     - Build FTS5 MATCH queries with BM25 column weights (title=10, tags=5, description=1)
     - Handle queries < 2 chars by returning full dataset
@@ -183,7 +183,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - **Validates: Requirements 2.3**
 
 - [ ] 10. Filter logic
-  - [ ] 10.1 Implement filter composition engine
+  - [~] 10.1 Implement filter composition engine
     - Write `src/lib/filters.ts` with filter logic for date range, format, and tags
     - Implement AND logic across filter types, OR logic within filter types
     - Implement date range presets (upcoming, this week, this month, custom)
@@ -215,7 +215,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - **Validates: Requirements 3.5**
 
 - [ ] 11. API routes
-  - [ ] 11.1 Implement GET /api/hackathons endpoint
+  - [~] 11.1 Implement GET /api/hackathons endpoint
     - Create `src/pages/api/hackathons/index.ts`
     - Accept query params: `q`, `page`, `pageSize`, `format`, `tags`, `dateStart`, `dateEnd`
     - Integrate search engine and filter logic
@@ -223,14 +223,14 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Validate input parameters (query length, page bounds)
     - _Requirements: 2.1, 2.2, 3.2, 3.3, 4.4_
 
-  - [ ] 11.2 Implement GET /api/hackathons/[id] endpoint
+  - [~] 11.2 Implement GET /api/hackathons/[id] endpoint
     - Create `src/pages/api/hackathons/[id].ts`
     - Fetch hackathon by ID or slug from D1
     - Return `HackathonDetailResponse` JSON
     - Return 404 for non-existent hackathons
     - _Requirements: 5.1, 5.3, 5.4_
 
-  - [ ] 11.3 Implement GET /api/health endpoint
+  - [~] 11.3 Implement GET /api/health endpoint
     - Create `src/pages/api/health.ts`
     - Check D1 database connectivity
     - Return health status JSON
@@ -242,31 +242,31 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify reported total count equals actual matching count in database
     - **Validates: Requirements 4.4**
 
-- [ ] 12. Checkpoint - Ensure API routes return correct data
+- [~] 12. Checkpoint - Ensure API routes return correct data
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 13. UI components (React islands)
-  - [ ] 13.1 Create base Astro layout with semantic HTML structure
+  - [~] 13.1 Create base Astro layout with semantic HTML structure
     - Write `src/layouts/Base.astro` with HTML boilerplate, nav, main, footer landmarks
     - Include h1 heading, proper semantic elements
     - Set up Tailwind responsive breakpoints
     - _Requirements: 6.1, 8.4_
 
-  - [ ] 13.2 Implement SearchBar React component
+  - [~] 13.2 Implement SearchBar React component
     - Write `src/components/SearchBar.tsx` as a React island (`client:load`)
     - Debounced input (300ms) with minimum 2-char threshold
     - Emit search query changes to parent/state
     - Show error state when search is unavailable
     - _Requirements: 2.1, 2.2, 6.2_
 
-  - [ ] 13.3 Implement FilterPanel React component
+  - [~] 13.3 Implement FilterPanel React component
     - Write `src/components/FilterPanel.tsx` as a React island (`client:visible`)
     - Include DateRangeFilter (presets + custom), FormatFilter, TagFilter sub-components
     - Implement clear-all functionality
     - Show validation error for invalid date ranges
     - _Requirements: 3.1, 3.2, 3.4, 3.5, 6.2_
 
-  - [ ] 13.4 Implement HackathonCard component with truncation rules
+  - [~] 13.4 Implement HackathonCard component with truncation rules
     - Write `src/components/HackathonCard.tsx`
     - Display title (truncated to 80 chars with ellipsis), start/end dates, format badge, up to 3 tags, organizer
     - Link to detail page via slug
@@ -279,7 +279,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify title truncated to <=80 chars with ellipsis if original exceeds 80, and max 3 tags displayed
     - **Validates: Requirements 4.2**
 
-  - [ ] 13.6 Implement HackathonGrid with infinite scroll
+  - [~] 13.6 Implement HackathonGrid with infinite scroll
     - Write `src/components/HackathonGrid.tsx` and `src/components/InfiniteScroll.tsx`
     - Fetch from `/api/hackathons` with pagination
     - Append next batch (12 items) on scroll-to-bottom
@@ -288,24 +288,24 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Show "no results" message when empty
     - _Requirements: 4.1, 4.3, 4.5, 4.6, 4.7, 6.4, 6.5_
 
-  - [ ] 13.7 Implement LoadingSkeleton Astro component
+  - [~] 13.7 Implement LoadingSkeleton Astro component
     - Write `src/components/LoadingSkeleton.astro` with animated placeholders matching card dimensions
     - _Requirements: 6.4_
 
 - [ ] 14. SSR pages
-  - [ ] 14.1 Implement landing page (/)
+  - [~] 14.1 Implement landing page (/)
     - Write `src/pages/index.astro` with featured hackathons section
     - SSR with edge caching
     - Include search prompt and navigation to full listing
     - _Requirements: 6.1, 8.1_
 
-  - [ ] 14.2 Implement hackathon listing page (/hackathons)
+  - [~] 14.2 Implement hackathon listing page (/hackathons)
     - Write `src/pages/hackathons/index.astro` with SearchBar, FilterPanel, and HackathonGrid islands
     - SSR with reactive client-side updates
     - Display total result count
     - _Requirements: 4.1, 4.4, 6.1, 6.2, 8.1_
 
-  - [ ] 14.3 Implement hackathon detail page (/hackathons/[slug])
+  - [~] 14.3 Implement hackathon detail page (/hackathons/[slug])
     - Write `src/pages/hackathons/[slug].astro` with full hackathon details
     - Display: title, description, dates, location, organizer, prizes, tags, source link (opens in new tab)
     - Handle 404 for non-existent slugs
@@ -319,7 +319,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - **Validates: Requirements 5.3**
 
 - [ ] 15. SEO implementation
-  - [ ] 15.1 Add meta tags to detail pages (OG, Twitter, canonical)
+  - [~] 15.1 Add meta tags to detail pages (OG, Twitter, canonical)
     - Add og:title, og:description, og:url, twitter:card, twitter:title meta tags to detail page layout
     - Add canonical URL meta tag
     - Populate from hackathon content
@@ -331,7 +331,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify HTML output contains all required meta tags with non-empty values
     - **Validates: Requirements 8.2, 8.5**
 
-  - [ ] 15.3 Implement dynamic sitemap.xml generation
+  - [~] 15.3 Implement dynamic sitemap.xml generation
     - Write `src/pages/sitemap.xml.ts` that queries D1 for all published hackathons
     - Generate valid sitemap XML with detail page URLs
     - Update within 60 minutes of hackathon publish/removal
@@ -343,12 +343,12 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify sitemap contains exactly the URLs for published hackathons and none for removed ones
     - **Validates: Requirements 8.3**
 
-  - [ ] 15.5 Ensure semantic HTML structure across all pages
+  - [~] 15.5 Ensure semantic HTML structure across all pages
     - Verify h1 headings, nav/main landmarks, list elements for repeating items on listing and detail pages
     - _Requirements: 8.4_
 
 - [ ] 16. Error handling
-  - [ ] 16.1 Implement global error handler and error page
+  - [~] 16.1 Implement global error handler and error page
     - Create error page returning 500 with generic message (no internals exposed)
     - Implement not-found (404) page with navigation back to listing
     - Add error boundary for React islands
@@ -360,32 +360,32 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify 500 response body never contains stack traces, file paths, env vars, D1 connection strings, or Worker internals
     - **Validates: Requirements 7.5**
 
-  - [ ] 16.3 Implement client-side error states and retry logic
+  - [~] 16.3 Implement client-side error states and retry logic
     - Add exponential backoff retry (1s, 2s, 4s, max 3 retries) for network/5xx errors
     - Show "search temporarily unavailable" banner with retry on search failure
     - Show inline error + retry at bottom of list on infinite scroll failure
     - Replace skeletons with error message after 10s timeout
     - _Requirements: 2.5, 4.7, 6.5_
 
-- [ ] 17. Checkpoint - Ensure full UI renders correctly with all error states
+- [~] 17. Checkpoint - Ensure full UI renders correctly with all error states
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 18. Integration tests
-  - [ ] 18.1 Write D1 integration tests
+  - [~] 18.1 Write D1 integration tests
     - Test migrations apply cleanly and FTS5 table is created
     - Test FTS5 triggers sync data on insert/update/delete
     - Test search returns correctly ranked results from D1
     - Test deduplication merges records in D1
     - _Requirements: 1.2, 1.6, 2.1, 2.3_
 
-  - [ ] 18.2 Write API route integration tests
+  - [~] 18.2 Write API route integration tests
     - Test `/api/hackathons` with various query/filter combinations
     - Test `/api/hackathons/[id]` returns correct detail and 404
     - Test `/api/health` returns connectivity status
     - Test response shapes match defined interfaces
     - _Requirements: 2.1, 3.2, 4.4, 5.1, 5.4_
 
-  - [ ] 18.3 Write aggregation worker integration tests
+  - [~] 18.3 Write aggregation worker integration tests
     - Test `scheduled()` handler completes with mock sources
     - Test partial source failure handling (some sources fail, others succeed)
     - Test all-sources-failed scenario preserves existing data
@@ -415,21 +415,21 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - _Requirements: 8.2, 8.3, 8.5_
 
 - [ ] 20. Deployment configuration and final wiring
-  - [ ] 20.1 Finalize deployment configuration
+  - [~] 20.1 Finalize deployment configuration
     - Verify `wrangler.toml` configurations for both Pages and Aggregation Worker
     - Set up D1 database creation commands in README/scripts
     - Configure HTTPS redirect (Cloudflare automatic)
     - Verify custom domain configuration approach
     - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
-  - [ ] 20.2 Wire all components together and verify build
+  - [~] 20.2 Wire all components together and verify build
     - Ensure all imports resolve correctly
     - Verify Astro build succeeds with Cloudflare adapter
     - Verify aggregation worker builds independently
     - Test `wrangler pages dev` serves pages locally
     - _Requirements: 7.1_
 
-- [ ] 21. Final checkpoint - Full system verification
+- [~] 21. Final checkpoint - Full system verification
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

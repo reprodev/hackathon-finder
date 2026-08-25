@@ -214,8 +214,8 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify rejection when start > end, acceptance otherwise
     - **Validates: Requirements 3.5**
 
-- [ ] 11. API routes
-  - [~] 11.1 Implement GET /api/hackathons endpoint
+- [x] 11. API routes
+  - [x] 11.1 Implement GET /api/hackathons endpoint
     - Create `src/pages/api/hackathons/index.ts`
     - Accept query params: `q`, `page`, `pageSize`, `format`, `tags`, `dateStart`, `dateEnd`
     - Integrate search engine and filter logic
@@ -223,26 +223,26 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Validate input parameters (query length, page bounds)
     - _Requirements: 2.1, 2.2, 3.2, 3.3, 4.4_
 
-  - [~] 11.2 Implement GET /api/hackathons/[id] endpoint
+  - [x] 11.2 Implement GET /api/hackathons/[id] endpoint
     - Create `src/pages/api/hackathons/[id].ts`
     - Fetch hackathon by ID or slug from D1
     - Return `HackathonDetailResponse` JSON
     - Return 404 for non-existent hackathons
     - _Requirements: 5.1, 5.3, 5.4_
 
-  - [~] 11.3 Implement GET /api/health endpoint
+  - [x] 11.3 Implement GET /api/health endpoint
     - Create `src/pages/api/health.ts`
     - Check D1 database connectivity
     - Return health status JSON
     - _Requirements: 7.1_
 
-  - [ ]* 11.4 Write property test for result count consistency (Property 14)
+  - [x]* 11.4 Write property test for result count consistency (Property 14)
     - **Property 14: Result count consistency**
     - Generate random search/filter combinations and datasets
     - Verify reported total count equals actual matching count in database
     - **Validates: Requirements 4.4**
 
-- [~] 12. Checkpoint - Ensure API routes return correct data
+- [x] 12. Checkpoint - Ensure API routes return correct data
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 13. UI components (React islands)

@@ -164,6 +164,45 @@ export async function getHackathonBySlug(
 }
 
 /**
+ * Get a single hackathon by its ID.
+ * Returns the full HackathonDetail or null if not found.
+ */
+export async function getHackathonById(
+  db: D1Database,
+  id: string
+): Promise<HackathonDetail | null> {
+  const orm = drizzle(db);
+
+  const rows = await orm
+    .select()
+    .from(hackathons)
+    .where(eq(hackathons.id, id))
+    .limit(1);
+
+  if (rows.length === 0) {
+    return null;
+  }
+
+  const row = rows[0];
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    description: row.description,
+    startDate: row.startDate,
+    endDate: row.endDate,
+    location: row.location,
+    format: row.format as HackathonDetail['format'],
+    organizer: row.organizer,
+    prizes: row.prizes,
+    tags: JSON.parse(row.tags) as string[],
+    sourceUrl: row.sourceUrl,
+    sources: JSON.parse(row.sources) as string[],
+    updatedAt: row.updatedAt,
+  };
+}
+
+/**
  * Insert or update a hackathon using the title+start_date deduplication constraint.
  * On conflict, merges sources and updates relevant fields.
  */

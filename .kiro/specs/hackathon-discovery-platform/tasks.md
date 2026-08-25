@@ -7,7 +7,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 ## Tasks
 
 - [ ] 1. Project scaffolding and configuration
-  - [ ] 1.1 Initialize Astro project with Cloudflare adapter, React integration, and Tailwind CSS
+  - [x] 1.1 Initialize Astro project with Cloudflare adapter, React integration, and Tailwind CSS
     - Run `npm create astro` with TypeScript strict mode
     - Install and configure `@astrojs/cloudflare`, `@astrojs/react`, `@astrojs/tailwind`
     - Configure `astro.config.mjs` with Cloudflare adapter and React integration
@@ -15,7 +15,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Create `src/env.d.ts` with D1 binding types
     - _Requirements: 7.1, 6.1_
 
-  - [ ] 1.2 Set up Drizzle ORM with D1 driver and project directory structure
+  - [x] 1.2 Set up Drizzle ORM with D1 driver and project directory structure
     - Install `drizzle-orm`, `drizzle-kit`, `@cloudflare/workers-types`
     - Create `drizzle.config.ts` for D1
     - Create directory structure: `src/pages/`, `src/components/`, `src/lib/db/`, `src/lib/`, `src/layouts/`, `workers/aggregator/adapters/`

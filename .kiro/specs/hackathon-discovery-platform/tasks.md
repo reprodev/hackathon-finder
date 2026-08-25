@@ -35,7 +35,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - _Requirements: 7.1_
 
 - [ ] 2. Database schema and migrations
-  - [ ] 2.1 Create Drizzle schema for hackathons, aggregation_logs, and refresh_metadata tables
+  - [x] 2.1 Create Drizzle schema for hackathons, aggregation_logs, and refresh_metadata tables
     - Define `src/lib/db/schema.ts` with all tables, columns, indexes per design
     - Include deduplication unique index on (title, start_date)
     - Include indexes on start_date and format columns
@@ -56,19 +56,19 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 - [ ] 3. Checkpoint - Ensure project builds and migrations are valid
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 4. Shared types and utilities
-  - [ ] 4.1 Define shared TypeScript types and interfaces
+- [x] 4. Shared types and utilities
+  - [x] 4.1 Define shared TypeScript types and interfaces
     - Create `src/lib/types.ts` with all shared interfaces: `HackathonSummary`, `HackathonDetailResponse`, `HackathonListResponse`, `FilterCriteria`, `PaginationParams`, `SearchResult`
     - Define API response shapes per design
     - _Requirements: 1.2, 2.1, 3.2, 4.2_
 
-  - [ ] 4.2 Implement slug generation utility
+  - [x] 4.2 Implement slug generation utility
     - Create utility function to generate URL-safe slugs from hackathon titles
     - Handle special characters, Unicode, and potential collisions
     - _Requirements: 5.3_
 
 - [ ] 5. Source adapters (Aggregation Worker)
-  - [ ] 5.1 Create source adapter interface and base types
+  - [x] 5.1 Create source adapter interface and base types
     - Write `workers/aggregator/adapters/interface.ts` with `EventSourceAdapter` and `RawHackathonEvent` interfaces
     - _Requirements: 1.1, 1.4_
 

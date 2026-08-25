@@ -99,8 +99,8 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify aggregator stores data from healthy sources and logs failures
     - **Validates: Requirements 1.4, 1.7**
 
-- [ ] 6. Data normalizer and deduplicator
-  - [ ] 6.1 Implement data normalizer with validation
+- [x] 6. Data normalizer and deduplicator
+  - [x] 6.1 Implement data normalizer with validation
     - Write `workers/aggregator/normalizer.ts` implementing `DataNormalizer` interface
     - Enforce field length constraints: title<=200, description<=5000, tags<=20
     - Validate required fields (title, startDate, sourceUrl) are present and non-empty
@@ -113,7 +113,7 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify output always conforms to schema constraints
     - **Validates: Requirements 1.2**
 
-  - [ ] 6.3 Implement deduplication engine
+  - [x] 6.3 Implement deduplication engine
     - Write `workers/aggregator/deduplicator.ts` implementing `DeduplicationEngine` interface
     - Query D1 for existing records by title (case-insensitive) + start_date
     - Merge records from different sources preserving information from both

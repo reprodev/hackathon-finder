@@ -55,6 +55,17 @@ const currentPath = Astro.url.pathname;
               Browse Hackathons
             </a>
           </li>
+          <li>
+            <a
+              href="/about"
+              class:list={[
+                "text-sm font-medium transition-colors hover:text-indigo-400",
+                currentPath === "/about" ? "text-indigo-400" : "text-gray-300",
+              ]}
+            >
+              About
+            </a>
+          </li>
         </ul>
 
         <!-- Mobile menu button -->
@@ -93,6 +104,17 @@ const currentPath = Astro.url.pathname;
               ]}
             >
               Browse Hackathons
+            </a>
+          </li>
+          <li>
+            <a
+              href="/about"
+              class:list={[
+                "block rounded-md px-3 py-2 text-base font-medium transition-colors hover:bg-gray-800 hover:text-white",
+                currentPath === "/about" ? "text-indigo-400 bg-gray-900" : "text-gray-300",
+              ]}
+            >
+              About
             </a>
           </li>
         </ul>

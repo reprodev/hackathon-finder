@@ -1,0 +1,287 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="About - HackFinder" description="The story behind HackFinder — why it was built, the tech stack, and the developer behind it.">
+
+  <!-- Hero / Intro -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/50 via-gray-950 to-purple-950/30" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        About <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">HackFinder</span>
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-gray-300">
+        A hackathon discovery platform born out of frustration, built with modern tools, and deployed at the edge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 1: Why I Built This -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="why-heading">
+    <h2 id="why-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+      Why I Built HackFinder
+    </h2>
+    <div class="mt-6 space-y-4 text-gray-300 leading-relaxed">
+      <p>
+        As someone who regularly participates in hackathons, I found the experience of discovering events frustrating. Hackathons are scattered across Devpost, MLH, HackerEarth, and other platforms — each with their own interface, their own search quirks, and no way to see everything in one view.
+      </p>
+      <p>
+        I kept missing deadlines or discovering great events too late because there was no single source of truth. HackFinder solves that by aggregating hackathon data from multiple platforms into one searchable, filterable interface.
+      </p>
+      <p>
+        Beyond solving a real problem, this project also serves as a portfolio piece demonstrating full-stack development, edge computing with Cloudflare, and modern web architecture — all built from scratch using a spec-driven workflow.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: How It Was Made -->
+  <section class="border-y border-gray-800 bg-gray-900/30" aria-labelledby="how-heading">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 id="how-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+        How It Was Made
+      </h2>
+      <p class="mt-3 text-lg font-medium text-indigo-400">Built with Kiro — an AI-powered IDE</p>
+      <p class="mt-4 text-gray-300 leading-relaxed">
+        This project was built using Kiro's spec-driven workflow, which guided the entire process from requirements gathering to deployment. Here's how it came together:
+      </p>
+
+      <ol class="mt-8 space-y-6" role="list">
+        <li class="flex gap-4">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600/20 ring-1 ring-indigo-500/30 text-sm font-semibold text-indigo-400">1</span>
+          <div>
+            <h3 class="font-semibold text-white">Requirements</h3>
+            <p class="mt-1 text-sm text-gray-400">Defined 8 requirements covering data aggregation, search, filtering, responsive UI, SEO, and deployment.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600/20 ring-1 ring-indigo-500/30 text-sm font-semibold text-indigo-400">2</span>
+          <div>
+            <h3 class="font-semibold text-white">Design</h3>
+            <p class="mt-1 text-sm text-gray-400">Architected the system with Astro + Cloudflare Pages/Workers/D1, an adapter pattern for data sources, and FTS5 for search.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600/20 ring-1 ring-indigo-500/30 text-sm font-semibold text-indigo-400">3</span>
+          <div>
+            <h3 class="font-semibold text-white">Task Breakdown</h3>
+            <p class="mt-1 text-sm text-gray-400">83 tasks organized into waves, each building on the previous — from schema design through UI polish.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600/20 ring-1 ring-indigo-500/30 text-sm font-semibold text-indigo-400">4</span>
+          <div>
+            <h3 class="font-semibold text-white">Implementation</h3>
+            <p class="mt-1 text-sm text-gray-400">Code generated and verified task-by-task with 230 unit tests ensuring correctness at every step.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600/20 ring-1 ring-indigo-500/30 text-sm font-semibold text-indigo-400">5</span>
+          <div>
+            <h3 class="font-semibold text-white">Deployment</h3>
+            <p class="mt-1 text-sm text-gray-400">Deployed to Cloudflare's edge network for global performance — entirely on the free tier.</p>
+          </div>
+        </li>
+      </ol>
+
+      <!-- Kiro callout -->
+      <div class="mt-10 rounded-xl border border-indigo-500/30 bg-indigo-950/30 p-6 sm:p-8">
+        <p class="text-sm font-medium text-indigo-300">
+          Want to build something like this?
+        </p>
+        <p class="mt-2 text-gray-300">
+          Check out <a href="https://kiro.dev" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-400 underline underline-offset-2 hover:text-indigo-300 transition-colors">Kiro</a> — the AI-powered development environment that guided this entire build from requirements to deployment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Tech Stack -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="stack-heading">
+    <h2 id="stack-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+      Tech Stack
+    </h2>
+    <p class="mt-3 text-gray-400">The technologies powering HackFinder</p>
+
+    <ul class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2" role="list">
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-orange-600/20">
+          <svg class="h-5 w-5 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Astro</p>
+          <p class="text-xs text-gray-400">SSR framework</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-cyan-600/20">
+          <svg class="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">React</p>
+          <p class="text-xs text-gray-400">Interactive islands</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-sky-600/20">
+          <svg class="h-5 w-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Tailwind CSS</p>
+          <p class="text-xs text-gray-400">Styling</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-amber-600/20">
+          <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Cloudflare Pages</p>
+          <p class="text-xs text-gray-400">Hosting</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-amber-600/20">
+          <svg class="h-5 w-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Cloudflare Workers</p>
+          <p class="text-xs text-gray-400">Aggregation</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-emerald-600/20">
+          <svg class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Cloudflare D1</p>
+          <p class="text-xs text-gray-400">SQLite at the edge</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-violet-600/20">
+          <svg class="h-5 w-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">FTS5</p>
+          <p class="text-xs text-gray-400">Full-text search with BM25 ranking</p>
+        </div>
+      </li>
+      <li class="flex items-center gap-3 rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-md bg-green-600/20">
+          <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </span>
+        <div>
+          <p class="text-sm font-medium text-white">Vitest + fast-check</p>
+          <p class="text-xs text-gray-400">Testing</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Section 4: Built By -->
+  <section class="border-t border-gray-800 bg-gray-900/30" aria-labelledby="built-by-heading">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 id="built-by-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+        Built By
+      </h2>
+      <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-indigo-600/20 ring-2 ring-indigo-500/30">
+          <span class="text-2xl font-bold text-indigo-400">RD</span>
+        </div>
+        <div>
+          <p class="text-xl font-bold text-white">ReproDev</p>
+          <p class="mt-1 text-gray-400">Full-stack developer, hackathon enthusiast, builder of things.</p>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="https://github.com/reprodev"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2.5 text-sm font-medium text-gray-200 transition-colors hover:border-indigo-500/50 hover:bg-gray-800 hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+          </svg>
+          GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/khurram-nazir-50b6a13aa"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2.5 text-sm font-medium text-gray-200 transition-colors hover:border-indigo-500/50 hover:bg-gray-800 hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          LinkedIn
+        </a>
+        <a
+          href="https://reprodev.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2.5 text-sm font-medium text-gray-200 transition-colors hover:border-indigo-500/50 hover:bg-gray-800 hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+          </svg>
+          Blog
+        </a>
+        <a
+          href="https://codingagents.fyi"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2.5 text-sm font-medium text-gray-200 transition-colors hover:border-indigo-500/50 hover:bg-gray-800 hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+          </svg>
+          Hackathon Projects
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-gray-500">See my hackathon projects and other builds at codingagents.fyi</p>
+    </div>
+  </section>
+
+  <!-- Section 5: View the Code -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="code-heading">
+    <div class="rounded-2xl border border-gray-800 bg-gradient-to-br from-indigo-950/40 to-purple-950/40 p-10 text-center sm:p-14">
+      <h2 id="code-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+        View the Code
+      </h2>
+      <p class="mt-4 text-gray-400">
+        The full source is open on GitHub. The git history shows the development progression commit-by-commit — from initial scaffold through final polish.
+      </p>
+      <a
+        href="https://github.com/reprodev/hackfinder"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-8 inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 hover:bg-indigo-500 transition-all hover:shadow-indigo-600/40"
+      >
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+        </svg>
+        View on GitHub
+      </a>
+    </div>
+  </section>
+
+</Base>

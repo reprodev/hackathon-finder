@@ -1,4 +1,4 @@
-name = "hackfinder"
+name = "hackathon-finder"
 compatibility_date = "2024-09-23"
 
 [[d1_databases]]

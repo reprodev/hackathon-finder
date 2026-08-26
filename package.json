@@ -1,5 +1,5 @@
 {
-  "name": "hackfinder",
+  "name": "hackathon-finder",
   "version": "1.0.0",
   "description": "HackFinder - Find hackathons from around the world",
   "type": "module",

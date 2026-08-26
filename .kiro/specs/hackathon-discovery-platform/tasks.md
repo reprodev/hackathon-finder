@@ -370,37 +370,37 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
 - [x] 17. Checkpoint - Ensure full UI renders correctly with all error states
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 18. Integration tests
-  - [~] 18.1 Write D1 integration tests
+- [x] 18. Integration tests
+  - [x] 18.1 Write D1 integration tests
     - Test migrations apply cleanly and FTS5 table is created
     - Test FTS5 triggers sync data on insert/update/delete
     - Test search returns correctly ranked results from D1
     - Test deduplication merges records in D1
     - _Requirements: 1.2, 1.6, 2.1, 2.3_
 
-  - [~] 18.2 Write API route integration tests
+  - [x] 18.2 Write API route integration tests
     - Test `/api/hackathons` with various query/filter combinations
     - Test `/api/hackathons/[id]` returns correct detail and 404
     - Test `/api/health` returns connectivity status
     - Test response shapes match defined interfaces
     - _Requirements: 2.1, 3.2, 4.4, 5.1, 5.4_
 
-  - [~] 18.3 Write aggregation worker integration tests
+  - [x] 18.3 Write aggregation worker integration tests
     - Test `scheduled()` handler completes with mock sources
     - Test partial source failure handling (some sources fail, others succeed)
     - Test all-sources-failed scenario preserves existing data
     - Test refresh_metadata and aggregation_logs are updated correctly
     - _Requirements: 1.1, 1.4, 1.7_
 
-- [ ] 19. E2E tests (Playwright)
-  - [ ]* 19.1 Write E2E tests for search and filter flows
+- [x] 19. E2E tests (Playwright)
+  - [x]* 19.1 Write E2E tests for search and filter flows
     - Test search updates results reactively
     - Test filter application narrows results correctly
     - Test combined search + filter
     - Test "no results" state
     - _Requirements: 2.1, 3.2, 3.3, 4.6, 6.2_
 
-  - [ ]* 19.2 Write E2E tests for navigation and responsive layout
+  - [x]* 19.2 Write E2E tests for navigation and responsive layout
     - Test card click navigates to detail page
     - Test permalink direct URL access
     - Test mobile viewport (320px) single-column layout
@@ -409,27 +409,27 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Test skeleton loading states
     - _Requirements: 4.1, 4.3, 5.3, 6.1, 6.4, 6.6_
 
-  - [ ]* 19.3 Write E2E tests for SEO verification
+  - [x]* 19.3 Write E2E tests for SEO verification
     - Test meta tags present in page source
     - Test sitemap.xml accessible and valid
     - _Requirements: 8.2, 8.3, 8.5_
 
-- [ ] 20. Deployment configuration and final wiring
-  - [~] 20.1 Finalize deployment configuration
+- [x] 20. Deployment configuration and final wiring
+  - [x] 20.1 Finalize deployment configuration
     - Verify `wrangler.toml` configurations for both Pages and Aggregation Worker
     - Set up D1 database creation commands in README/scripts
     - Configure HTTPS redirect (Cloudflare automatic)
     - Verify custom domain configuration approach
     - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
-  - [~] 20.2 Wire all components together and verify build
+  - [x] 20.2 Wire all components together and verify build
     - Ensure all imports resolve correctly
     - Verify Astro build succeeds with Cloudflare adapter
     - Verify aggregation worker builds independently
     - Test `wrangler pages dev` serves pages locally
     - _Requirements: 7.1_
 
-- [~] 21. Final checkpoint - Full system verification
+- [x] 21. Final checkpoint - Full system verification
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

@@ -272,6 +272,68 @@ import Base from "../layouts/Base.astro";
     </div>
   </section>
 
+  <!-- Section: Past Hackathon Projects -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="projects-heading">
+    <h2 id="projects-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+      Past Hackathon Projects
+    </h2>
+    <p class="mt-3 text-gray-400">A few things I've built at hackathons</p>
+
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      <!-- Rondel -->
+      <a
+        href="https://rondel.reprodev.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group rounded-xl border border-gray-800 bg-gray-900/50 p-6 transition-all hover:border-indigo-500/50 hover:bg-gray-900 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
+      >
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-pink-600/20">
+            <svg class="h-5 w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
+            </svg>
+          </span>
+          <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors">Rondel</h3>
+        </div>
+        <p class="mt-3 text-sm text-gray-400 leading-relaxed">
+          Browser-based music maker — 75 presets, 30 instruments, WAV + MIDI export. No install, no account, just press play.
+        </p>
+        <span class="mt-4 inline-flex items-center text-xs font-medium text-indigo-400 group-hover:text-indigo-300">
+          rondel.reprodev.com
+          <svg class="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </span>
+      </a>
+
+      <!-- Commit Oracle -->
+      <a
+        href="https://github.com/reprodev/commit-oracle"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group rounded-xl border border-gray-800 bg-gray-900/50 p-6 transition-all hover:border-indigo-500/50 hover:bg-gray-900 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20"
+      >
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-600/20">
+            <svg class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
+          </span>
+          <h3 class="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors">Commit Oracle</h3>
+        </div>
+        <p class="mt-3 text-sm text-gray-400 leading-relaxed">
+          A Kiro Crew App that delivers daily code health readings as tarot card spreads — real git metrics, actionable commands, and trend tracking wrapped in mystical storytelling.
+        </p>
+        <span class="mt-4 inline-flex items-center text-xs font-medium text-indigo-400 group-hover:text-indigo-300">
+          github.com/reprodev/commit-oracle
+          <svg class="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
   <!-- Section 5: View the Code -->
   <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="code-heading">
     <div class="rounded-2xl border border-gray-800 bg-gradient-to-br from-indigo-950/40 to-purple-950/40 p-10 text-center sm:p-14">

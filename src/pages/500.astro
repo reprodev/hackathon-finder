@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Server Error - HackathonHub">
+  <section class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-32 sm:px-6 lg:px-8">
+    <div class="flex h-20 w-20 items-center justify-center rounded-full bg-red-600/20 ring-1 ring-red-500/30">
+      <svg class="h-10 w-10 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+      </svg>
+    </div>
+
+    <h1 class="mt-8 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+      Something Went Wrong
+    </h1>
+
+    <p class="mt-4 max-w-md text-center text-lg text-gray-400">
+      We encountered an unexpected error. Please try again later.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 hover:bg-indigo-500 transition-all hover:shadow-indigo-600/40"
+      >
+        Go Home
+      </a>
+      <a
+        href="/hackathons"
+        class="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-semibold text-gray-300 hover:border-gray-600 hover:text-white transition-colors"
+      >
+        Browse Hackathons
+      </a>
+    </div>
+  </section>
+</Base>

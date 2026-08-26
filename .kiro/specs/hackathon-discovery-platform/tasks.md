@@ -318,56 +318,56 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Verify generating a permalink from slug and querying it resolves to same hackathon data
     - **Validates: Requirements 5.3**
 
-- [ ] 15. SEO implementation
-  - [~] 15.1 Add meta tags to detail pages (OG, Twitter, canonical)
+- [x] 15. SEO implementation
+  - [x] 15.1 Add meta tags to detail pages (OG, Twitter, canonical)
     - Add og:title, og:description, og:url, twitter:card, twitter:title meta tags to detail page layout
     - Add canonical URL meta tag
     - Populate from hackathon content
     - _Requirements: 8.2, 8.5_
 
-  - [ ]* 15.2 Write property test for meta tag completeness (Property 17)
+  - [x]* 15.2 Write property test for meta tag completeness (Property 17)
     - **Property 17: Meta tag completeness on detail pages**
     - Generate random hackathon data with varying lengths and special chars
     - Verify HTML output contains all required meta tags with non-empty values
     - **Validates: Requirements 8.2, 8.5**
 
-  - [~] 15.3 Implement dynamic sitemap.xml generation
+  - [x] 15.3 Implement dynamic sitemap.xml generation
     - Write `src/pages/sitemap.xml.ts` that queries D1 for all published hackathons
     - Generate valid sitemap XML with detail page URLs
     - Update within 60 minutes of hackathon publish/removal
     - _Requirements: 8.3_
 
-  - [ ]* 15.4 Write property test for sitemap completeness (Property 18)
+  - [x]* 15.4 Write property test for sitemap completeness (Property 18)
     - **Property 18: Sitemap completeness**
     - Generate random sets of published/removed hackathons
     - Verify sitemap contains exactly the URLs for published hackathons and none for removed ones
     - **Validates: Requirements 8.3**
 
-  - [~] 15.5 Ensure semantic HTML structure across all pages
+  - [x] 15.5 Ensure semantic HTML structure across all pages
     - Verify h1 headings, nav/main landmarks, list elements for repeating items on listing and detail pages
     - _Requirements: 8.4_
 
-- [ ] 16. Error handling
-  - [~] 16.1 Implement global error handler and error page
+- [x] 16. Error handling
+  - [x] 16.1 Implement global error handler and error page
     - Create error page returning 500 with generic message (no internals exposed)
     - Implement not-found (404) page with navigation back to listing
     - Add error boundary for React islands
     - _Requirements: 7.5, 5.4_
 
-  - [ ]* 16.2 Write property test for error response information containment (Property 16)
+  - [x]* 16.2 Write property test for error response information containment (Property 16)
     - **Property 16: Error response information containment**
     - Generate random error types and messages containing file paths, stack traces, env vars
     - Verify 500 response body never contains stack traces, file paths, env vars, D1 connection strings, or Worker internals
     - **Validates: Requirements 7.5**
 
-  - [~] 16.3 Implement client-side error states and retry logic
+  - [x] 16.3 Implement client-side error states and retry logic
     - Add exponential backoff retry (1s, 2s, 4s, max 3 retries) for network/5xx errors
     - Show "search temporarily unavailable" banner with retry on search failure
     - Show inline error + retry at bottom of list on infinite scroll failure
     - Replace skeletons with error message after 10s timeout
     - _Requirements: 2.5, 4.7, 6.5_
 
-- [~] 17. Checkpoint - Ensure full UI renders correctly with all error states
+- [x] 17. Checkpoint - Ensure full UI renders correctly with all error states
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 18. Integration tests

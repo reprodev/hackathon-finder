@@ -1,6 +1,6 @@
-# Hackathon Discovery Platform
+# HackFinder
 
-A self-hosted web application that aggregates hackathon events from multiple public sources (Devpost, MLH, HackerEarth) and presents them in a searchable, filterable interface. Deployed on Cloudflare's edge network for fast global access with zero server management.
+Find hackathons from around the world. HackFinder aggregates events from Devpost, MLH, and HackerEarth into one searchable, filterable interface. Deployed on Cloudflare's edge network for fast global access with zero server management.
 
 ## What It Does
 

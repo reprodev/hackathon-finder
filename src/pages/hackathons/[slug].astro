@@ -58,10 +58,10 @@ function getFormatClasses(format: Format): string {
 }
 
 const canonicalUrl = new URL(`/hackathons/${slug}`, Astro.site || Astro.url.origin).href;
-const pageTitle = hackathon ? `${hackathon.title} - HackathonHub` : "Hackathon Not Found - HackathonHub";
+const pageTitle = hackathon ? `${hackathon.title} - HackFinder` : "Hackathon Not Found - HackFinder";
 const pageDescription = hackathon?.description
   ? hackathon.description.slice(0, 160)
-  : "Hackathon details on HackathonHub";
+  : "Hackathon details on HackFinder";
 ---
 
 <Base title={pageTitle} description={pageDescription}>

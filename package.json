@@ -1,7 +1,7 @@
 {
-  "name": "hackathon-discovery-platform",
+  "name": "hackfinder",
   "version": "1.0.0",
-  "description": "Hackathon Discovery Platform - Aggregates hackathon events from multiple sources",
+  "description": "HackFinder - Find hackathons from around the world",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

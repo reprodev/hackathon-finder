@@ -1,0 +1,11 @@
+---
+import Base from "../../layouts/Base.astro";
+import HackathonGrid from "../../components/HackathonGrid";
+---
+
+<Base title="Browse Hackathons - HackathonHub" description="Search and filter hackathons from Devpost, MLH, HackerEarth and more.">
+  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-white mb-8">Browse Hackathons</h1>
+    <HackathonGrid client:load />
+  </section>
+</Base>

@@ -478,6 +478,16 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787690767299
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787693565544
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787708904957
       }
     ],
     "14.2 Implement hackathon listing page (/hackathons)": [
@@ -485,6 +495,16 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787690767328
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787693566397
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787708903279
       }
     ],
     "14.3 Implement hackathon detail page (/hackathons/[slug])": [
@@ -492,6 +512,16 @@
         "executionId": "e4c1fcb9-54a6-418e-95a2-c3b890d9015d",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787690767361
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787693567355
+      },
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787708904072
       }
     ],
     "15.1 Add meta tags to detail pages (OG, Twitter, canonical)": [
@@ -709,6 +739,20 @@
         "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
         "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
         "timestamp": 1787693550599
+      }
+    ],
+    "14. SSR pages": [
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787708905098
+      }
+    ],
+    "14.4 Write property test for permalink round-trip (Property 15)": [
+      {
+        "executionId": "445b37ed-3dc0-494a-9186-a437710d9369",
+        "chatSessionId": "sess_6cc5eb23-039b-4a1a-8149-b2124120677d",
+        "timestamp": 1787708906266
       }
     ]
   }

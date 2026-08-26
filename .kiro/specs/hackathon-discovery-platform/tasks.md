@@ -292,27 +292,27 @@ Build a self-hosted hackathon discovery platform deployed on Cloudflare's edge n
     - Write `src/components/LoadingSkeleton.astro` with animated placeholders matching card dimensions
     - _Requirements: 6.4_
 
-- [ ] 14. SSR pages
-  - [~] 14.1 Implement landing page (/)
+- [x] 14. SSR pages
+  - [x] 14.1 Implement landing page (/)
     - Write `src/pages/index.astro` with featured hackathons section
     - SSR with edge caching
     - Include search prompt and navigation to full listing
     - _Requirements: 6.1, 8.1_
 
-  - [~] 14.2 Implement hackathon listing page (/hackathons)
+  - [x] 14.2 Implement hackathon listing page (/hackathons)
     - Write `src/pages/hackathons/index.astro` with SearchBar, FilterPanel, and HackathonGrid islands
     - SSR with reactive client-side updates
     - Display total result count
     - _Requirements: 4.1, 4.4, 6.1, 6.2, 8.1_
 
-  - [~] 14.3 Implement hackathon detail page (/hackathons/[slug])
+  - [x] 14.3 Implement hackathon detail page (/hackathons/[slug])
     - Write `src/pages/hackathons/[slug].astro` with full hackathon details
     - Display: title, description, dates, location, organizer, prizes, tags, source link (opens in new tab)
     - Handle 404 for non-existent slugs
     - Handle missing source URL gracefully
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 8.1_
 
-  - [ ]* 14.4 Write property test for permalink round-trip (Property 15)
+  - [x]* 14.4 Write property test for permalink round-trip (Property 15)
     - **Property 15: Permalink round-trip**
     - Generate random hackathon slugs and data
     - Verify generating a permalink from slug and querying it resolves to same hackathon data

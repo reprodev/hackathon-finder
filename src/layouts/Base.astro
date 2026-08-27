@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Find hackathons from multiple sources - Devpost, MLH, HackerEarth and more." } = Astro.props;
+const { title, description = "Find hackathons from multiple sources - Devpost, MLH, HackerEarth, DoraHacks and more." } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -132,7 +132,7 @@ const currentPath = Astro.url.pathname;
             &copy; {new Date().getFullYear()} HackFinder. All rights reserved.
           </p>
           <p class="text-sm text-gray-500">
-            Find your next hackathon &mdash; powered by Devpost, MLH &amp; HackerEarth.
+            Find your next hackathon &mdash; powered by Devpost, MLH, HackerEarth &amp; DoraHacks.
           </p>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 ---
 
-<Base title="HackFinder - Find Hackathons Worldwide" description="Find hackathons from Devpost, MLH, HackerEarth and more. Search, filter, and find your next opportunity to build something great.">
+<Base title="HackFinder - Find Hackathons Worldwide" description="Find hackathons from Devpost, MLH, HackerEarth, DoraHacks and more. Search, filter, and find your next opportunity to build something great.">
 
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
@@ -13,7 +13,7 @@ import Base from "../layouts/Base.astro";
         <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Hackathon</span>
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-300">
-        Find hackathons from Devpost, MLH, HackerEarth and more &mdash; all in one place.
+        Find hackathons from Devpost, MLH, HackerEarth, DoraHacks and more &mdash; all in one place.
         Search, filter, and never miss an opportunity to build something great.
       </p>
       <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -42,7 +42,7 @@ import Base from "../layouts/Base.astro";
         </div>
         <div class="text-center">
           <dt class="text-sm font-medium text-gray-400">Data Sources</dt>
-          <dd class="mt-2 text-3xl font-bold tracking-tight text-white">3</dd>
+          <dd class="mt-2 text-3xl font-bold tracking-tight text-white">4</dd>
         </div>
         <div class="text-center">
           <dt class="text-sm font-medium text-gray-400">Refresh Frequency</dt>
@@ -111,7 +111,7 @@ import Base from "../layouts/Base.astro";
       </h2>
       <p class="mt-3 text-center text-gray-400">Data aggregated from the top hackathon platforms</p>
 
-      <ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3" role="list">
+      <ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" role="list">
         <!-- Devpost -->
         <li class="flex flex-col items-center rounded-xl border border-gray-800 bg-gray-900/50 p-8 transition-colors hover:border-cyan-500/50 hover:bg-gray-900">
           <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-600/20">
@@ -148,6 +148,19 @@ import Base from "../layouts/Base.astro";
           <h3 class="mt-4 text-lg font-semibold text-white">HackerEarth</h3>
           <p class="mt-2 text-center text-sm text-gray-400">
             Developer challenges and hackathons from one of the leading competitive programming platforms.
+          </p>
+        </li>
+
+        <!-- DoraHacks -->
+        <li class="flex flex-col items-center rounded-xl border border-gray-800 bg-gray-900/50 p-8 transition-colors hover:border-cyan-500/50 hover:bg-gray-900">
+          <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-purple-600/20">
+            <svg class="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-white">DoraHacks</h3>
+          <p class="mt-2 text-center text-sm text-gray-400">
+            Web3 and frontier tech hackathons with large prize pools, often exceeding $100k in crypto and funding.
           </p>
         </li>
       </ul>

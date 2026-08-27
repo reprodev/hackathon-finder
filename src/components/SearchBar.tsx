@@ -70,10 +70,10 @@ export default function SearchBar({
           aria-label="Search hackathons"
           aria-invalid={!!error}
           aria-describedby={error ? "search-error" : undefined}
-          className={`block w-full rounded-lg border bg-gray-800 py-3 pl-10 pr-10 text-sm text-white placeholder-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50 ${
+          className={`block w-full rounded-lg border bg-gray-800 py-3 pl-10 pr-10 text-sm text-white placeholder-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:cursor-not-allowed disabled:opacity-50 ${
             error
               ? "border-red-500 focus:ring-red-500"
-              : "border-gray-700 hover:border-gray-600 focus:border-indigo-500"
+              : "border-gray-700 hover:border-gray-600 focus:border-cyan-400"
           }`}
         />
 

@@ -114,7 +114,7 @@ function InlineLoader() {
   return (
     <div className="flex items-center justify-center py-6">
       <svg
-        className="h-6 w-6 animate-spin text-indigo-400"
+        className="h-6 w-6 animate-spin text-cyan-400"
         fill="none"
         viewBox="0 0 24 24"
         aria-hidden="true"

@@ -78,7 +78,7 @@ function DateRangeFilter({
             onClick={() => onPresetSelect(preset.value)}
             className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
               activePreset === preset.value
-                ? 'bg-indigo-600 text-white'
+                ? 'bg-cyan-500 text-white'
                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
             }`}
           >
@@ -108,7 +108,7 @@ function DateRangeFilter({
             type="date"
             value={activePreset ? '' : dateRange?.start ?? ''}
             onChange={(e) => onCustomDateChange('start', e.target.value)}
-            className="w-full rounded-md border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs text-gray-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-md border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs text-gray-200 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
           />
         </div>
         <div>
@@ -120,7 +120,7 @@ function DateRangeFilter({
             type="date"
             value={activePreset ? '' : dateRange?.end ?? ''}
             onChange={(e) => onCustomDateChange('end', e.target.value)}
-            className="w-full rounded-md border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs text-gray-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-md border border-gray-700 bg-gray-800 px-2 py-1.5 text-xs text-gray-200 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
           />
         </div>
       </div>
@@ -153,7 +153,7 @@ function FormatFilter({
               type="checkbox"
               checked={selectedFormats.includes(option.value)}
               onChange={() => onToggle(option.value)}
-              className="h-4 w-4 rounded border-gray-600 bg-gray-800 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-0"
+              className="h-4 w-4 rounded border-gray-600 bg-gray-800 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-0"
             />
             <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
               {option.label}
@@ -188,7 +188,7 @@ function TagFilter({
               onClick={() => onToggle(tag)}
               className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                 isSelected
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-cyan-500 text-white'
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
               aria-pressed={isSelected}
@@ -366,7 +366,7 @@ export default function FilterPanel({
         <span className="text-sm font-medium text-gray-200">
           Filters
           {activeFilterCount > 0 && (
-            <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white">
+            <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500 text-xs text-white">
               {activeFilterCount}
             </span>
           )}
@@ -395,7 +395,7 @@ export default function FilterPanel({
             <button
               type="button"
               onClick={handleClearAll}
-              className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               Clear All
             </button>

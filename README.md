@@ -103,32 +103,66 @@ curl http://localhost:8787/__scheduled
 
 ## Deployment to Cloudflare
 
-### 1. Deploy the Pages project (frontend + API)
+### 1. Create the D1 database
+
+Using Wrangler CLI (recommended):
 
 ```bash
-npm run build
-npx wrangler pages deploy dist
+npx wrangler d1 create hackathon-discovery-db
 ```
 
-Or connect your repository to Cloudflare Pages for automatic git-based deploys:
-1. Go to Cloudflare Dashboard > Pages
-2. Create a new project and connect your Git repository
-3. Set build command: `npm run build`
-4. Set build output directory: `dist`
+Copy the `database_id` from the output and update both `wrangler.toml` files (root and `workers/aggregator/wrangler.toml`), replacing `<your-d1-database-id>`.
 
-### 2. Deploy the Aggregation Worker
+### 2. Run the migration on the remote database
+
+```bash
+npx wrangler d1 execute hackathon-discovery-db --remote --file=src/lib/db/migrations/0001_create_tables.sql
+```
+
+### 3. Connect your GitHub repo to Cloudflare Pages
+
+1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com)
+2. Navigate to **Workers & Pages**
+3. Click **Create** → **Pages** → **Connect to Git**
+4. Sign in with GitHub and select the `hackathon-finder` repository
+5. Configure the build settings:
+   - **Project name**: `hackathon-finder`
+   - **Production branch**: `main`
+   - **Build command**: `npm run build`
+   - **Build output directory**: `dist`
+6. Click **Save and Deploy**
+
+The first deploy will fail because the D1 binding isn't set up yet — that's expected.
+
+### 4. Bind D1 to your Pages project
+
+After the first deploy completes (even if it fails):
+
+1. Go to **Workers & Pages** → select your `hackathon-finder` project
+2. Go to **Settings** → **Bindings** → **Add**
+3. Select **D1 database**
+4. Set **Variable name** to: `DB`
+5. Under **D1 database**, select `hackathon-discovery-db`
+6. Click **Save**
+7. **Redeploy** your project (go to Deployments → click the three dots on latest → Retry deployment)
+
+### 5. Deploy the Aggregation Worker
 
 ```bash
 npx wrangler deploy --config workers/aggregator/wrangler.toml
 ```
 
-This deploys the worker with its Cron Trigger (runs every hour by default).
+This sets up the hourly Cron Trigger that fetches hackathon data from all sources.
 
-### 3. Run the migration on production D1
+### 6. Trigger the first data aggregation (optional)
+
+After deploying the worker, manually trigger the first run so you have data immediately:
 
 ```bash
-npx wrangler d1 execute hackathon-discovery-db --remote --file=src/lib/db/migrations/0001_create_tables.sql
+curl https://hackathon-finder-aggregator.<your-account>.workers.dev/__scheduled
 ```
+
+Or wait for the hourly cron to run automatically.
 
 ## Custom Domain Setup
 
@@ -140,7 +174,7 @@ Cloudflare Pages supports custom domains with automatic HTTPS:
    - Proxy: enabled (orange cloud)
 
 2. **Configure in Pages settings**:
-   - Go to Cloudflare Dashboard > Pages > your project > Custom domains
+   - Go to **Workers & Pages** → select your project → **Custom domains**
    - Click "Set up a custom domain"
    - Enter your domain (e.g., `hackathons.yourdomain.com`)
    - Cloudflare provisions a TLS certificate automatically
@@ -154,7 +188,7 @@ Cloudflare Pages supports custom domains with automatic HTTPS:
 
 All HTTP requests are automatically redirected to HTTPS by Cloudflare's edge network. This is enabled by default for all Pages projects and requires no configuration. To verify:
 
-- Go to Cloudflare Dashboard > your domain > SSL/TLS > Edge Certificates
+- Go to the [Cloudflare dashboard](https://dash.cloudflare.com) → select your domain → **SSL/TLS** → **Edge Certificates**
 - Ensure "Always Use HTTPS" is toggled ON (it is by default)
 
 ### TLS Certificates (Requirement 7.4)

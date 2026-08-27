@@ -4,4 +4,4 @@ compatibility_date = "2024-09-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "hackathon-discovery-db"
-database_id = "<your-d1-database-id>"
+database_id = "7326f750-94fc-46fb-8bca-e386a2a9b353"

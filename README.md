@@ -2,6 +2,14 @@
 
 Find hackathons from around the world. HackFinder aggregates events from Devpost, MLH, and HackerEarth into one searchable, filterable interface. Deployed on Cloudflare's edge network for fast global access with zero server management.
 
+## The Story
+
+My first virtual hackathon was the [Ready, Spec, Ship Hackathon](https://codingagents.fyi/hackathon/kiro/) in 2026. After that, I wanted to find more — but discovered that hackathons are scattered across Devpost, MLH, HackerEarth, DoraHacks, and others with no single place to search them all.
+
+I kept missing events or finding out about them after deadlines had passed. So I built HackFinder — a tool that aggregates hackathon data from multiple platforms, updated hourly, with full-text search and filtering. If I had this problem, others probably do too.
+
+Built with [Kiro](https://kiro.dev) using a spec-driven workflow, deployed on Cloudflare's edge network (free tier), and fully open source.
+
 ## What It Does
 
 - **Aggregates** hackathon data from Devpost, MLH, and HackerEarth on an hourly schedule

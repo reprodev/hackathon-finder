@@ -125,6 +125,10 @@ import Base from "../layouts/Base.astro";
             <span class="text-red-400 shrink-0">●</span>
             <span><strong class="text-gray-200">database_id in wrangler.toml:</strong> The Cloudflare git integration's deploy step needs a valid database_id in wrangler.toml. A placeholder breaks the build. The ID is a read-only identifier (not a secret), so it's safe to commit.</span>
           </li>
+          <li class="flex gap-2">
+            <span class="text-red-400 shrink-0">●</span>
+            <span><strong class="text-gray-200">Raw HTML in API data:</strong> Devpost returns prize amounts wrapped in HTML tags (e.g., <code class="text-xs bg-gray-800 px-1.5 py-0.5 rounded">&lt;span data-currency-value&gt;33,900&lt;/span&gt;</code>). Our normalizer initially stored this raw — it displayed as broken markup on the detail page. Fix: added a <code class="text-xs bg-gray-800 px-1.5 py-0.5 rounded">stripHtml()</code> function in the normalizer, then had to wipe D1 and re-aggregate because existing records weren't updated on merge.</span>
+          </li>
         </ul>
       </div>
     </div>

@@ -103,66 +103,87 @@ curl http://localhost:8787/__scheduled
 
 ## Deployment to Cloudflare
 
+### Prerequisites
+
+- A [Cloudflare account](https://dash.cloudflare.com/sign-up) (free tier is sufficient)
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) installed (`npm install -g wrangler`) and authenticated (`wrangler login`)
+
 ### 1. Create the D1 database
 
-Using Wrangler CLI (recommended):
+In your terminal:
 
 ```bash
 npx wrangler d1 create hackathon-discovery-db
 ```
 
-Copy the `database_id` from the output and update both `wrangler.toml` files (root and `workers/aggregator/wrangler.toml`), replacing `<your-d1-database-id>`.
+This outputs a `database_id`. Copy it and replace `<your-d1-database-id>` in both:
+- `wrangler.toml` (root — Pages project)
+- `workers/aggregator/wrangler.toml` (Aggregation Worker)
 
-### 2. Run the migration on the remote database
+### 2. Run the database migration
 
 ```bash
 npx wrangler d1 execute hackathon-discovery-db --remote --file=src/lib/db/migrations/0001_create_tables.sql
 ```
 
-### 3. Connect your GitHub repo to Cloudflare Pages
+This creates all tables, the FTS5 virtual table for search, and the sync triggers.
+
+### 3. Connect your GitHub repo to Cloudflare
 
 1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com)
-2. Navigate to **Workers & Pages**
-3. Click **Create** → **Pages** → **Connect to Git**
-4. Sign in with GitHub and select the `hackathon-finder` repository
-5. Configure the build settings:
+2. In the left sidebar, click **Workers & Pages** (under "Build > Compute")
+3. Click the **"Create application"** button (top right, orange)
+4. Choose **Import a repository** → connect your GitHub account if not already connected
+5. Select the `hackathon-finder` repository
+6. On the "Set up your application" screen, configure:
    - **Project name**: `hackathon-finder`
-   - **Production branch**: `main`
    - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-6. Click **Save and Deploy**
+   - **Deploy command**: `npx wrangler deploy` (pre-filled)
+   - **Advanced settings > Path**: `/` (leave as default)
+7. Click **Deploy**
 
-The first deploy will fail because the D1 binding isn't set up yet — that's expected.
+> **Note:** The first deployment may fail because the D1 binding isn't configured yet. This is expected — proceed to step 4.
 
-### 4. Bind D1 to your Pages project
+### 4. Bind D1 to your project
 
-After the first deploy completes (even if it fails):
+After the first deployment completes (even if it failed):
 
-1. Go to **Workers & Pages** → select your `hackathon-finder` project
-2. Go to **Settings** → **Bindings** → **Add**
-3. Select **D1 database**
+1. Go to **Workers & Pages** and click on your `hackathon-finder` project
+2. Navigate to **Settings** → **Bindings**
+3. Click **Add** → select **D1 database**
 4. Set **Variable name** to: `DB`
-5. Under **D1 database**, select `hackathon-discovery-db`
+5. Under **D1 database**, select `hackathon-discovery-db` from the dropdown
 6. Click **Save**
-7. **Redeploy** your project (go to Deployments → click the three dots on latest → Retry deployment)
+7. Trigger a new deployment: go to **Deployments** → click the three dots (⋮) on the latest deployment → **Retry deployment**
+
+The retry should now succeed with the D1 binding in place.
 
 ### 5. Deploy the Aggregation Worker
+
+The aggregation worker runs separately on a Cron Trigger (every hour by default):
 
 ```bash
 npx wrangler deploy --config workers/aggregator/wrangler.toml
 ```
 
-This sets up the hourly Cron Trigger that fetches hackathon data from all sources.
+This creates the `hackathon-finder-aggregator` worker with its hourly cron schedule.
 
-### 6. Trigger the first data aggregation (optional)
+### 6. Trigger the first data fetch (optional)
 
-After deploying the worker, manually trigger the first run so you have data immediately:
+To populate the database immediately without waiting for the first hourly cron:
 
 ```bash
-curl https://hackathon-finder-aggregator.<your-account>.workers.dev/__scheduled
+curl https://hackathon-finder-aggregator.<your-subdomain>.workers.dev/__scheduled
 ```
 
-Or wait for the hourly cron to run automatically.
+Replace `<your-subdomain>` with your Cloudflare Workers subdomain (shown in your dashboard under Workers & Pages > Overview). Or simply wait up to 60 minutes for the cron to run automatically.
+
+### Deployment summary
+
+After completing these steps, you'll have:
+- **Pages project** (`hackathon-finder`) — serves the frontend + API routes, auto-deploys on every `git push` to `main`
+- **Aggregation Worker** (`hackathon-finder-aggregator`) — runs hourly via Cron Trigger, fetches hackathon data from sources
+- **D1 Database** (`hackathon-discovery-db`) — shared by both, stores all hackathon data with FTS5 search index
 
 ## Custom Domain Setup
 

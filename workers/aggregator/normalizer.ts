@@ -7,6 +7,23 @@
 
 import type { RawHackathonEvent } from './adapters/interface';
 
+/**
+ * Strip HTML tags from a string, preserving the text content.
+ * Also normalizes whitespace and decodes common HTML entities.
+ */
+export function stripHtml(str: string): string {
+  return str
+    .replace(/<[^>]*>/g, '')     // Remove HTML tags
+    .replace(/&amp;/g, '&')      // Decode &amp;
+    .replace(/&lt;/g, '<')       // Decode &lt;
+    .replace(/&gt;/g, '>')       // Decode &gt;
+    .replace(/&quot;/g, '"')     // Decode &quot;
+    .replace(/&#39;/g, "'")      // Decode &#39;
+    .replace(/&nbsp;/g, ' ')     // Decode &nbsp;
+    .replace(/\s+/g, ' ')        // Collapse whitespace
+    .trim();
+}
+
 /** Maximum field length constraints */
 const MAX_TITLE_LENGTH = 200;
 const MAX_DESCRIPTION_LENGTH = 5000;
@@ -116,12 +133,12 @@ export function isValidISO8601(dateStr: string): boolean {
  * - Maps source fields to normalized fields
  */
 export function normalize(raw: RawHackathonEvent): NormalizedHackathon {
-  // Trim and truncate title
-  const title = (raw.title || '').trim().substring(0, MAX_TITLE_LENGTH);
+  // Trim, strip HTML, and truncate title
+  const title = stripHtml(raw.title || '').substring(0, MAX_TITLE_LENGTH);
 
-  // Trim and truncate description
-  const rawDesc = raw.description?.trim() || null;
-  const description = rawDesc ? rawDesc.substring(0, MAX_DESCRIPTION_LENGTH) : null;
+  // Strip HTML, trim, and truncate description
+  const rawDesc = raw.description ? stripHtml(raw.description) : null;
+  const description = rawDesc && rawDesc.length > 0 ? rawDesc.substring(0, MAX_DESCRIPTION_LENGTH) : null;
 
   // Trim startDate
   const startDate = (raw.startDate || '').trim();
@@ -137,13 +154,11 @@ export function normalize(raw: RawHackathonEvent): NormalizedHackathon {
   // Detect format from location
   const format = detectFormat(raw.location);
 
-  // Organizer: trim, null if empty
-  const rawOrganizer = raw.organizer?.trim() || null;
-  const organizer = rawOrganizer || null;
+  // Organizer: strip HTML, trim, null if empty
+  const organizer = raw.organizer ? stripHtml(raw.organizer) || null : null;
 
-  // Prizes: trim, null if empty
-  const rawPrizes = raw.prizes?.trim() || null;
-  const prizes = rawPrizes || null;
+  // Prizes: strip HTML, trim, null if empty
+  const prizes = raw.prizes ? stripHtml(raw.prizes) || null : null;
 
   // Tags: filter empty, trim, limit to 20
   const tags = (raw.tags || [])

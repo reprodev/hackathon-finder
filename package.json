@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/generate-og.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
@@ -35,6 +35,7 @@
     "@cloudflare/vitest-pool-workers": "^0.22.0",
     "@cloudflare/workers-types": "^5.20260825.1",
     "@playwright/test": "^1.62.1",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "drizzle-kit": "^0.31.10",

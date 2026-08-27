@@ -21,10 +21,14 @@ import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import type { FilterCriteria, PaginationParams, HackathonListResponse, Format } from '../../../lib/types';
 import { searchHackathons, SearchQueryTooLongError, MAX_QUERY_LENGTH } from '../../../lib/search';
+import type { SortOption } from '../../../lib/search';
 import { validateDateRange } from '../../../lib/filters';
 
 /** Valid format values */
 const VALID_FORMATS: Set<string> = new Set(['virtual', 'in_person', 'hybrid']);
+
+/** Valid sort values */
+const VALID_SORTS: Set<string> = new Set(['newest', 'ending_soon', 'prize_desc']);
 
 export const GET: APIRoute = async ({ request }) => {
   const db = env.DB as D1Database;
@@ -39,6 +43,7 @@ export const GET: APIRoute = async ({ request }) => {
   const tagsRaw = url.searchParams.get('tags');
   const dateStart = url.searchParams.get('dateStart');
   const dateEnd = url.searchParams.get('dateEnd');
+  const sortRaw = url.searchParams.get('sort');
 
   const errors: string[] = [];
 
@@ -83,6 +88,16 @@ export const GET: APIRoute = async ({ request }) => {
     tags = tagsRaw.split(',').map((t) => t.trim()).filter(Boolean);
     if (tags.length === 0) {
       tags = undefined;
+    }
+  }
+
+  // Validate sort parameter
+  let sort: SortOption | undefined;
+  if (sortRaw) {
+    if (!VALID_SORTS.has(sortRaw)) {
+      errors.push(`Invalid sort value: ${sortRaw}. Valid values: newest, ending_soon, prize_desc`);
+    } else {
+      sort = sortRaw as SortOption;
     }
   }
 
@@ -139,7 +154,7 @@ export const GET: APIRoute = async ({ request }) => {
   // --- Execute search ---
 
   try {
-    const result = await searchHackathons(db, query, filters, pagination);
+    const result = await searchHackathons(db, query, filters, pagination, sort);
 
     const response: HackathonListResponse = {
       data: result.hackathons,

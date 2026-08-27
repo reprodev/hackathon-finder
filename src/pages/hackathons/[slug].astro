@@ -111,6 +111,17 @@ const pageDescription = hackathon?.description
         </h1>
       </header>
 
+      {/* Countdown timer (only if endDate is in the future) */}
+      {hackathon.endDate && new Date(hackathon.endDate) > new Date() && (
+        <div class="mb-8 rounded-xl border border-cyan-500/30 bg-cyan-950/20 p-6 text-center" id="countdown-container">
+          <p class="text-sm font-medium text-cyan-400 mb-2">Submission Deadline</p>
+          <div class="text-3xl font-bold text-white" id="countdown-timer">
+            Calculating...
+          </div>
+          <p class="mt-2 text-xs text-gray-400" id="countdown-date"></p>
+        </div>
+      )}
+
       {/* Key info grid */}
       <div class="grid gap-4 sm:grid-cols-2 mb-8">
         {/* Dates */}
@@ -190,8 +201,9 @@ const pageDescription = hackathon?.description
         </section>
       )}
 
-      {/* Source link */}
+      {/* Source link and calendar export */}
       <section class="mt-10 pt-6 border-t border-gray-700">
+        <div class="flex flex-wrap items-center gap-4">
         {hackathon.sourceUrl ? (
           <a
             href={hackathon.sourceUrl}
@@ -209,8 +221,84 @@ const pageDescription = hackathon?.description
             The original event page is not available.
           </p>
         )}
+          {/* Calendar export button */}
+          <a
+            id="cal-export"
+            download="hackathon.ics"
+            class="inline-flex items-center gap-2 rounded-xl border border-gray-700 px-6 py-3 text-sm font-semibold text-gray-300 hover:border-cyan-500/50 hover:text-white transition-colors"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Add to Calendar
+          </a>
+        </div>
       </section>
     </article>
+
+    <script define:vars={{ title: hackathon.title, startDate: hackathon.startDate, endDate: hackathon.endDate, description: hackathon.description, sourceUrl: hackathon.sourceUrl }}>
+      function generateICS(title, startDate, endDate, description, url) {
+        const formatDate = (d) => new Date(d).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+        const start = formatDate(startDate);
+        const end = endDate ? formatDate(endDate) : formatDate(new Date(new Date(startDate).getTime() + 24*60*60*1000));
+        const desc = (description || '').slice(0, 200).replace(/\n/g, '\\n');
+
+        return [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//HackFinder//EN',
+          'BEGIN:VEVENT',
+          `DTSTART:${start}`,
+          `DTEND:${end}`,
+          `SUMMARY:${title}`,
+          `DESCRIPTION:${desc}`,
+          `URL:${url || ''}`,
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ].join('\r\n');
+      }
+
+      const ics = generateICS(title, startDate, endDate, description, sourceUrl);
+      const blob = new Blob([ics], { type: 'text/calendar' });
+      const link = document.getElementById('cal-export');
+      if (link) {
+        link.href = URL.createObjectURL(blob);
+        link.download = `${title.slice(0, 50).replace(/[^a-zA-Z0-9]/g, '-')}.ics`;
+      }
+    </script>
+
+    <script define:vars={{ endDateStr: hackathon.endDate }}>
+      if (endDateStr) {
+        const endDate = new Date(endDateStr);
+        const timerEl = document.getElementById('countdown-timer');
+        const dateEl = document.getElementById('countdown-date');
+
+        if (dateEl) {
+          dateEl.textContent = `Ends: ${endDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}`;
+        }
+
+        function updateCountdown() {
+          const now = new Date();
+          const diff = endDate.getTime() - now.getTime();
+
+          if (diff <= 0) {
+            if (timerEl) timerEl.textContent = 'Ended';
+            return;
+          }
+
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+          if (timerEl) {
+            timerEl.textContent = `${days}d ${hours}h ${minutes}m remaining`;
+          }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+      }
+    </script>
   ) : (
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8 text-center">
       <h1 class="text-3xl font-bold text-white mb-4">Hackathon Not Found</h1>

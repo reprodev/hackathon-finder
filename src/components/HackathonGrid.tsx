@@ -10,6 +10,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { HackathonSummary, FilterCriteria } from '../lib/types';
+import type { SortOption } from '../lib/search';
 import SearchBar from './SearchBar';
 import FilterPanel from './FilterPanel';
 import HackathonCard from './HackathonCard';
@@ -150,12 +151,16 @@ function InlineError({ onRetry }: { onRetry: () => void }) {
 
 // ─── Helper: Build fetch URL ──────────────────────────────────────────────────
 
-function buildApiUrl(query: string, filters: FilterCriteria, page: number): string {
+function buildApiUrl(query: string, filters: FilterCriteria, page: number, sort: SortOption): string {
   const params = new URLSearchParams();
 
   if (query) params.set('q', query);
   params.set('page', String(page));
   params.set('pageSize', String(PAGE_SIZE));
+
+  if (sort !== 'newest') {
+    params.set('sort', sort);
+  }
 
   if (filters.format && filters.format.length > 0) {
     params.set('format', filters.format.join(','));
@@ -187,6 +192,7 @@ export default function HackathonGrid({
   // State
   const [query, setQuery] = useState(initialQuery);
   const [filters, setFilters] = useState<FilterCriteria>(initialFilters ?? {});
+  const [sort, setSort] = useState<SortOption>('newest');
   const [hackathons, setHackathons] = useState<HackathonSummary[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -206,7 +212,8 @@ export default function HackathonGrid({
       searchQuery: string,
       searchFilters: FilterCriteria,
       pageNum: number,
-      append: boolean
+      append: boolean,
+      sortOption: SortOption
     ) => {
       const fetchId = ++fetchIdRef.current;
 
@@ -222,7 +229,7 @@ export default function HackathonGrid({
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-        const url = buildApiUrl(searchQuery, searchFilters, pageNum);
+        const url = buildApiUrl(searchQuery, searchFilters, pageNum, sortOption);
         const response = await fetch(url, { signal: controller.signal });
 
         clearTimeout(timeoutId);
@@ -276,7 +283,7 @@ export default function HackathonGrid({
   // ─── Initial load ───────────────────────────────────────────────────────
 
   useEffect(() => {
-    fetchHackathons(query, filters, 1, false);
+    fetchHackathons(query, filters, 1, false, sort);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -287,9 +294,9 @@ export default function HackathonGrid({
       setQuery(newQuery);
       setPage(1);
       setHackathons([]);
-      fetchHackathons(newQuery, filters, 1, false);
+      fetchHackathons(newQuery, filters, 1, false, sort);
     },
-    [filters, fetchHackathons]
+    [filters, sort, fetchHackathons]
   );
 
   // ─── Filter Handler ─────────────────────────────────────────────────────
@@ -299,9 +306,21 @@ export default function HackathonGrid({
       setFilters(newFilters);
       setPage(1);
       setHackathons([]);
-      fetchHackathons(query, newFilters, 1, false);
+      fetchHackathons(query, newFilters, 1, false, sort);
     },
-    [query, fetchHackathons]
+    [query, sort, fetchHackathons]
+  );
+
+  // ─── Sort Handler ────────────────────────────────────────────────────
+
+  const handleSortChange = useCallback(
+    (newSort: SortOption) => {
+      setSort(newSort);
+      setPage(1);
+      setHackathons([]);
+      fetchHackathons(query, filters, 1, false, newSort);
+    },
+    [query, filters, fetchHackathons]
   );
 
   // ─── Load More (infinite scroll) ───────────────────────────────────────
@@ -309,19 +328,19 @@ export default function HackathonGrid({
   const handleLoadMore = useCallback(() => {
     if (loadingMore || !hasMore) return;
     const nextPage = page + 1;
-    fetchHackathons(query, filters, nextPage, true);
-  }, [loadingMore, hasMore, page, query, filters, fetchHackathons]);
+    fetchHackathons(query, filters, nextPage, true, sort);
+  }, [loadingMore, hasMore, page, query, filters, sort, fetchHackathons]);
 
   // ─── Retry Handlers ─────────────────────────────────────────────────────
 
   const handleRetry = useCallback(() => {
-    fetchHackathons(query, filters, 1, false);
-  }, [query, filters, fetchHackathons]);
+    fetchHackathons(query, filters, 1, false, sort);
+  }, [query, filters, sort, fetchHackathons]);
 
   const handleScrollRetry = useCallback(() => {
     const nextPage = page + 1;
-    fetchHackathons(query, filters, nextPage, true);
-  }, [page, query, filters, fetchHackathons]);
+    fetchHackathons(query, filters, nextPage, true, sort);
+  }, [page, query, filters, sort, fetchHackathons]);
 
   // ─── Render ─────────────────────────────────────────────────────────────
 
@@ -347,13 +366,24 @@ export default function HackathonGrid({
 
         {/* Results area */}
         <div className="flex-1 space-y-4">
-          {/* Result count */}
+          {/* Result count and sort dropdown */}
           {!loading && !error && (
-            <p className="text-sm text-gray-400">
-              Showing{' '}
-              <span className="font-medium text-gray-200">{hackathons.length}</span> of{' '}
-              <span className="font-medium text-gray-200">{total}</span> hackathons
-            </p>
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm text-gray-400">
+                Showing{' '}
+                <span className="font-medium text-gray-200">{hackathons.length}</span> of{' '}
+                <span className="font-medium text-gray-200">{total}</span> hackathons
+              </p>
+              <select
+                value={sort}
+                onChange={(e) => handleSortChange(e.target.value as SortOption)}
+                className="rounded-md border border-gray-600 bg-gray-800 px-3 py-1.5 text-sm text-gray-200 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+              >
+                <option value="newest">Newest first</option>
+                <option value="ending_soon">Ending soonest</option>
+                <option value="prize_desc">Prize pool (high to low)</option>
+              </select>
+            </div>
           )}
 
           {/* Initial loading state */}

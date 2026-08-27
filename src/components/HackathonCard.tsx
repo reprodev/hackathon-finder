@@ -39,6 +39,20 @@ function truncateTitle(title: string, maxLength: number = 80): string {
   return title.slice(0, maxLength) + '…';
 }
 
+/**
+ * Determines deadline status based on endDate relative to now.
+ * Returns 'ending_soon' if within 7 days, 'ended' if past, null otherwise.
+ */
+function getDeadlineStatus(endDate: string | null): 'ending_soon' | 'ended' | null {
+  if (!endDate) return null;
+  const end = new Date(endDate);
+  const now = new Date();
+  const daysLeft = (end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+  if (daysLeft < 0) return 'ended';
+  if (daysLeft <= 7) return 'ending_soon';
+  return null;
+}
+
 /** Format badge color mappings */
 const formatConfig: Record<Format, { label: string; classes: string }> = {
   virtual: { label: 'Virtual', classes: 'bg-green-900/60 text-green-300 border-green-700' },
@@ -67,18 +81,31 @@ export default function HackathonCard({ hackathon }: HackathonCardProps) {
   const dateRange = formatDateRange(startDate, endDate);
   const displayTags = tags.slice(0, 3);
   const badge = formatConfig[format];
+  const deadlineStatus = getDeadlineStatus(endDate);
 
   return (
     <a
       href={`/hackathons/${slug}`}
       className="group block rounded-lg border border-gray-700 bg-gray-800 p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/30 hover:border-gray-600"
     >
-      {/* Format badge */}
-      <span
-        className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium ${badge.classes}`}
-      >
-        {badge.label}
-      </span>
+      {/* Format badge + deadline badge */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span
+          className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium ${badge.classes}`}
+        >
+          {badge.label}
+        </span>
+        {deadlineStatus === 'ending_soon' && (
+          <span className="inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium bg-orange-900/60 text-orange-300 border-orange-700">
+            Ending Soon
+          </span>
+        )}
+        {deadlineStatus === 'ended' && (
+          <span className="inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium bg-gray-700/60 text-gray-400 border-gray-600">
+            Ended
+          </span>
+        )}
+      </div>
 
       {/* Title */}
       <h3 className="mt-3 text-lg font-semibold text-gray-100 group-hover:text-white leading-snug">
@@ -128,4 +155,4 @@ export default function HackathonCard({ hackathon }: HackathonCardProps) {
   );
 }
 
-export { truncateTitle, formatDateRange };
+export { truncateTitle, formatDateRange, getDeadlineStatus };

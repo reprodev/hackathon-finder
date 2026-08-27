@@ -120,6 +120,9 @@ export function mapRowToSummary(row: Record<string, unknown>): HackathonSummary 
   };
 }
 
+/** Sort options for hackathon listing */
+export type SortOption = 'newest' | 'ending_soon' | 'prize_desc';
+
 /**
  * Search hackathons using D1 FTS5 with BM25 ranking.
  *
@@ -132,13 +135,15 @@ export function mapRowToSummary(row: Record<string, unknown>): HackathonSummary 
  * @param query - Search query string
  * @param filters - Optional filter criteria (format, tags, dateRange)
  * @param pagination - Optional pagination parameters (page, pageSize)
+ * @param sort - Optional sort option (newest, ending_soon, prize_desc)
  * @returns SearchResult with paginated hackathons, total count, and hasMore flag
  */
 export async function searchHackathons(
   db: D1Database,
   query: string,
   filters?: FilterCriteria,
-  pagination?: PaginationParams
+  pagination?: PaginationParams,
+  sort?: SortOption
 ): Promise<SearchResult> {
   const page = pagination?.page ?? 1;
   const pageSize = pagination?.pageSize ?? DEFAULT_PAGE_SIZE;
@@ -155,9 +160,26 @@ export async function searchHackathons(
   const useSearch = query.length >= MIN_QUERY_LENGTH;
 
   if (useSearch) {
-    return searchWithFts(db, query, filterConditions, filterParams, page, pageSize, offset);
+    return searchWithFts(db, query, filterConditions, filterParams, page, pageSize, offset, sort);
   } else {
-    return searchWithoutFts(db, filterConditions, filterParams, page, pageSize, offset);
+    return searchWithoutFts(db, filterConditions, filterParams, page, pageSize, offset, sort);
+  }
+}
+
+/**
+ * Get the ORDER BY clause based on sort option.
+ * For FTS queries, default is BM25 rank. For non-FTS, default is start_date DESC.
+ */
+function getOrderByClause(sort: SortOption | undefined, isFts: boolean): string {
+  switch (sort) {
+    case 'ending_soon':
+      return 'ORDER BY CASE WHEN h.end_date IS NULL THEN 1 ELSE 0 END, h.end_date ASC';
+    case 'prize_desc':
+      return 'ORDER BY CASE WHEN h.prizes IS NULL THEN 1 ELSE 0 END, h.prizes DESC';
+    case 'newest':
+      return 'ORDER BY h.start_date DESC';
+    default:
+      return isFts ? 'ORDER BY rank' : 'ORDER BY h.start_date DESC';
   }
 }
 
@@ -171,13 +193,14 @@ async function searchWithFts(
   filterParams: unknown[],
   page: number,
   pageSize: number,
-  offset: number
+  offset: number,
+  sort?: SortOption
 ): Promise<SearchResult> {
   const sanitized = sanitizeFtsQuery(query);
 
   // If sanitization leaves nothing, fall back to unfiltered
   if (!sanitized) {
-    return searchWithoutFts(db, filterConditions, filterParams, page, pageSize, offset);
+    return searchWithoutFts(db, filterConditions, filterParams, page, pageSize, offset, sort);
   }
 
   // Build WHERE clause for filters
@@ -199,12 +222,13 @@ async function searchWithFts(
 
   // Data query with BM25 ranking
   // BM25 weights: title=10.0, description=1.0, tags=5.0
+  const orderBy = getOrderByClause(sort, true);
   const dataSql = `
     SELECT h.*, bm25(hackathon_fts, 10.0, 1.0, 5.0) AS rank
     FROM hackathon_fts fts
     JOIN hackathons h ON h.rowid = fts.rowid
     WHERE hackathon_fts MATCH ?${filterWhere}
-    ORDER BY rank
+    ${orderBy}
     LIMIT ? OFFSET ?
   `;
 
@@ -233,7 +257,8 @@ async function searchWithoutFts(
   filterParams: unknown[],
   page: number,
   pageSize: number,
-  offset: number
+  offset: number,
+  sort?: SortOption
 ): Promise<SearchResult> {
   const whereClause = filterConditions.length > 0
     ? 'WHERE ' + filterConditions.join(' AND ')
@@ -244,12 +269,13 @@ async function searchWithoutFts(
   const countResult = await db.prepare(countSql).bind(...filterParams).first<{ total: number }>();
   const total = countResult?.total ?? 0;
 
-  // Data query ordered by start date descending (most recent first)
+  // Data query with configurable sort order
+  const orderBy = getOrderByClause(sort, false);
   const dataSql = `
     SELECT h.*
     FROM hackathons h
     ${whereClause}
-    ORDER BY h.start_date DESC
+    ${orderBy}
     LIMIT ? OFFSET ?
   `;
 

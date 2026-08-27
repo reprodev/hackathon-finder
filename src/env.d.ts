@@ -1,11 +1,8 @@
 /// <reference types="astro/client" />
 
-interface Env {
-  DB: D1Database;
-}
-
-type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
-
-declare namespace App {
-  interface Locals extends Runtime {}
+declare module 'cloudflare:workers' {
+  interface Env {
+    DB: D1Database;
+  }
+  export const env: Env;
 }

@@ -18,6 +18,7 @@
  */
 
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import type { FilterCriteria, PaginationParams, HackathonListResponse, Format } from '../../../lib/types';
 import { searchHackathons, SearchQueryTooLongError, MAX_QUERY_LENGTH } from '../../../lib/search';
 import { validateDateRange } from '../../../lib/filters';
@@ -25,8 +26,8 @@ import { validateDateRange } from '../../../lib/filters';
 /** Valid format values */
 const VALID_FORMATS: Set<string> = new Set(['virtual', 'in_person', 'hybrid']);
 
-export const GET: APIRoute = async ({ request, locals }) => {
-  const db = locals.runtime.env.DB;
+export const GET: APIRoute = async ({ request }) => {
+  const db = env.DB as D1Database;
   const url = new URL(request.url);
 
   // --- Parse and validate query parameters ---

@@ -1,9 +1,10 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import { getHackathonBySlug, getHackathonById } from '../../../lib/db/queries';
 import type { HackathonDetailResponse, ErrorResponse } from '../../../lib/types';
 
-export const GET: APIRoute = async ({ params, locals }) => {
-  const db = locals.runtime.env.DB;
+export const GET: APIRoute = async ({ params }) => {
+  const db = env.DB as D1Database;
   const { id } = params;
 
   if (!id) {

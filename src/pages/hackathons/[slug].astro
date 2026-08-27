@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { env } from 'cloudflare:workers';
 import { getHackathonBySlug } from "../../lib/db/queries";
 import type { Format } from "../../lib/types";
 
@@ -9,7 +10,7 @@ if (!slug) {
   return Astro.redirect("/hackathons");
 }
 
-const db = Astro.locals.runtime.env.DB;
+const db = env.DB as D1Database;
 const hackathon = await getHackathonBySlug(db, slug);
 
 if (!hackathon) {

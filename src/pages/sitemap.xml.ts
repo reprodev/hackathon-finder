@@ -8,9 +8,10 @@
  */
 
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
-export const GET: APIRoute = async ({ locals, url }) => {
-  const db = locals.runtime.env.DB;
+export const GET: APIRoute = async ({ url }) => {
+  const db = env.DB as D1Database;
   const baseUrl = url.origin;
 
   // Query all hackathon slugs and their last-updated timestamps

@@ -4,4 +4,6 @@ compatibility_date = "2024-09-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "hackathon-discovery-db"
-database_id = "7326f750-94fc-46fb-8bca-e386a2a9b353"
+# For production: D1 binding is configured in the Cloudflare dashboard (Settings > Bindings)
+# For local dev: replace with your actual database_id from `npx wrangler d1 create`
+database_id = "<your-d1-database-id>"

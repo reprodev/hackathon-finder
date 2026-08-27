@@ -1,0 +1,167 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="How It Works - HackFinder" description="A technical deep-dive into HackFinder's architecture — data pipeline, search engine, frontend, and deployment.">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950/50 via-gray-950 to-cyan-950/30" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        How <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">HackFinder</span> Works
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-gray-300">
+        A technical deep-dive into the architecture powering hackathon discovery at the edge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="border-y border-gray-800 bg-gray-900/30" aria-labelledby="arch-heading">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 id="arch-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Architecture</h2>
+      <p class="mt-3 text-gray-400">Data flows from external sources to the browser in five hops.</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
+        <span class="rounded-lg border border-gray-700 bg-gray-800/70 px-4 py-2 text-gray-200">Sources</span>
+        <span class="text-cyan-400">→</span>
+        <span class="rounded-lg border border-cyan-500/40 bg-cyan-950/30 px-4 py-2 text-cyan-300">Worker</span>
+        <span class="text-cyan-400">→</span>
+        <span class="rounded-lg border border-gray-700 bg-gray-800/70 px-4 py-2 text-gray-200">D1</span>
+        <span class="text-cyan-400">→</span>
+        <span class="rounded-lg border border-cyan-500/40 bg-cyan-950/30 px-4 py-2 text-cyan-300">Pages</span>
+        <span class="text-cyan-400">→</span>
+        <span class="rounded-lg border border-gray-700 bg-gray-800/70 px-4 py-2 text-gray-200">Browser</span>
+      </div>
+      <p class="mt-6 text-sm text-gray-400 text-center">
+        A Cloudflare Worker fetches from Devpost, MLH, and HackerEarth on a cron schedule. Normalized data lands in D1 (SQLite at the edge). Astro on Cloudflare Pages reads D1 at request time and serves HTML.
+      </p>
+    </div>
+  </section>
+
+  <!-- Data Pipeline -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="pipeline-heading">
+    <h2 id="pipeline-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Data Pipeline</h2>
+    <p class="mt-3 text-gray-400">Every hour, the aggregation worker runs five steps:</p>
+    <ol class="mt-8 space-y-5" role="list">
+      <li class="flex gap-4">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 ring-1 ring-cyan-500/30 text-sm font-semibold text-cyan-400">1</span>
+        <div>
+          <h3 class="font-semibold text-white">Cron fires</h3>
+          <p class="mt-1 text-sm text-gray-400">A Cloudflare Cron Trigger wakes the worker every hour.</p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 ring-1 ring-cyan-500/30 text-sm font-semibold text-cyan-400">2</span>
+        <div>
+          <h3 class="font-semibold text-white">Fetch in parallel</h3>
+          <p class="mt-1 text-sm text-gray-400">All enabled source adapters run concurrently. If one fails, the rest still succeed.</p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 ring-1 ring-cyan-500/30 text-sm font-semibold text-cyan-400">3</span>
+        <div>
+          <h3 class="font-semibold text-white">Normalize</h3>
+          <p class="mt-1 text-sm text-gray-400">Raw responses are mapped to a shared schema — dates standardized, HTML stripped, fields validated.</p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 ring-1 ring-cyan-500/30 text-sm font-semibold text-cyan-400">4</span>
+        <div>
+          <h3 class="font-semibold text-white">Deduplicate</h3>
+          <p class="mt-1 text-sm text-gray-400">A unique index on (title, start_date) prevents duplicates. Existing records are merged, not overwritten.</p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 ring-1 ring-cyan-500/30 text-sm font-semibold text-cyan-400">5</span>
+        <div>
+          <h3 class="font-semibold text-white">Store</h3>
+          <p class="mt-1 text-sm text-gray-400">Data is upserted into D1. Triggers keep the FTS5 index in sync automatically.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Search -->
+  <section class="border-y border-gray-800 bg-gray-900/30" aria-labelledby="search-heading">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 id="search-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Search</h2>
+      <p class="mt-3 text-gray-400">Full-text search powered by SQLite FTS5 with BM25 relevance ranking.</p>
+      <ul class="mt-6 space-y-3 text-sm text-gray-300">
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">FTS5 + BM25:</strong> Queries hit a virtual table with porter tokenizer and unicode61 — typo-tolerant, language-aware ranking out of the box.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">Filter composition:</strong> Format, status, and date filters compose with search queries via SQL WHERE clauses — no post-filtering.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">Sub-300ms responses:</strong> D1 runs on the same edge as Pages. No network round-trip to a remote database.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Frontend -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="frontend-heading">
+    <h2 id="frontend-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Frontend</h2>
+    <p class="mt-3 text-gray-400">Fast by default, interactive where it matters.</p>
+    <ul class="mt-6 space-y-3 text-sm text-gray-300">
+      <li class="flex gap-2">
+        <span class="text-cyan-400 shrink-0">●</span>
+        <span><strong class="text-gray-200">Astro SSR:</strong> Pages render on the edge at request time — no client JS required for initial content.</span>
+      </li>
+      <li class="flex gap-2">
+        <span class="text-cyan-400 shrink-0">●</span>
+        <span><strong class="text-gray-200">React islands:</strong> Search, filters, and infinite scroll hydrate as interactive islands. The rest stays static HTML.</span>
+      </li>
+      <li class="flex gap-2">
+        <span class="text-cyan-400 shrink-0">●</span>
+        <span><strong class="text-gray-200">Tailwind CSS:</strong> Utility-first styling with zero runtime CSS. Dark theme, responsive, accessible.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CI/CD -->
+  <section class="border-y border-gray-800 bg-gray-900/30" aria-labelledby="cicd-heading">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 id="cicd-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">CI/CD</h2>
+      <p class="mt-3 text-gray-400">Two deployment paths, both automated.</p>
+      <ul class="mt-6 space-y-3 text-sm text-gray-300">
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">Pages:</strong> Git push to main auto-deploys via Cloudflare's git integration. Preview deploys on every branch.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">Worker:</strong> A GitHub Action deploys the aggregation worker on push to main. Runs <code class="text-xs bg-gray-800 px-1.5 py-0.5 rounded">wrangler deploy</code> from the worker directory.</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="text-cyan-400 shrink-0">●</span>
+          <span><strong class="text-gray-200">Secrets:</strong> API tokens and credentials are stored in GitHub Secrets — never committed, injected at deploy time.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Built With Kiro -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="kiro-heading">
+    <div class="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-slate-950/40 to-cyan-950/20 p-10 text-center sm:p-14">
+      <h2 id="kiro-heading" class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Built With Kiro</h2>
+      <p class="mt-4 text-gray-300">
+        This entire platform was built using Kiro's spec-driven workflow — from requirements gathering through design, implementation, and deployment. 83 tasks executed, 230 tests passing.
+      </p>
+      <a
+        href="https://kiro.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-8 inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 hover:bg-cyan-400 transition-all hover:shadow-cyan-500/40"
+      >
+        Learn about Kiro
+      </a>
+    </div>
+  </section>
+
+</Base>

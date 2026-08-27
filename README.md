@@ -12,10 +12,13 @@ Built with [Kiro](https://kiro.dev) using a spec-driven workflow, deployed on Cl
 
 ## What It Does
 
-- **Aggregates** hackathon data from Devpost, MLH, and HackerEarth on an hourly schedule
+- **Aggregates** hackathon data from Devpost, MLH, HackerEarth, and DoraHacks on an hourly schedule
 - **Searches** across all events with full-text search (FTS5 with BM25 ranking)
 - **Filters** by date range, format (virtual/in-person/hybrid), and tags
-- **Displays** results in a responsive grid with infinite scroll
+- **Sorts** by newest, ending soonest, or prize pool
+- **Displays** results in a responsive grid with infinite scroll and "Ending Soon" badges
+- **Exports** hackathon dates to your calendar (.ics download)
+- **Counts down** submission deadlines in real-time on detail pages
 - **Serves** SEO-friendly pages with server-side rendering and meta tags
 
 ## Tech Stack
@@ -192,6 +195,31 @@ After completing these steps, you'll have:
 - **Pages project** (`hackathon-finder`) — serves the frontend + API routes, auto-deploys on every `git push` to `main`
 - **Aggregation Worker** (`hackathon-finder-aggregator`) — runs hourly via Cron Trigger, fetches hackathon data from sources
 - **D1 Database** (`hackathon-discovery-db`) — shared by both, stores all hackathon data with FTS5 search index
+
+## CI/CD (Continuous Deployment)
+
+The project uses two automated deployment mechanisms:
+
+- **Cloudflare Pages (auto)** — The frontend + API auto-deploys on every push to `main` via Cloudflare's git integration
+- **GitHub Action (auto)** — The Aggregation Worker auto-deploys via GitHub Actions when files in `workers/aggregator/` change
+
+### Required GitHub Secrets
+
+| Secret | Purpose |
+|--------|---------|
+| `CLOUDFLARE_API_TOKEN` | API token with Workers edit permissions (created from "Edit Cloudflare Workers" template) |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account identifier |
+
+These are configured in: **Repository Settings → Secrets and variables → Actions → New repository secret**.
+
+No secrets are stored in the codebase. The workflow file (`.github/workflows/deploy-worker.yml`) only references secret names, never values.
+
+### How it works
+
+1. You push code to `main`
+2. Cloudflare detects the push and builds/deploys the Pages project automatically
+3. If the push changed files in `workers/aggregator/`, the GitHub Action also fires and deploys the updated worker
+4. Both use encrypted credentials that are never visible in logs or code
 
 ## Custom Domain Setup
 

@@ -66,6 +66,17 @@ const currentPath = Astro.url.pathname;
               About
             </a>
           </li>
+          <li>
+            <a
+              href="/how-it-works"
+              class:list={[
+                "text-sm font-medium transition-colors hover:text-cyan-400",
+                currentPath === "/how-it-works" ? "text-cyan-400" : "text-gray-300",
+              ]}
+            >
+              How It Works
+            </a>
+          </li>
         </ul>
 
         <!-- Mobile menu button -->
@@ -115,6 +126,17 @@ const currentPath = Astro.url.pathname;
               ]}
             >
               About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/how-it-works"
+              class:list={[
+                "block rounded-md px-3 py-2 text-base font-medium transition-colors hover:bg-gray-800 hover:text-white",
+                currentPath === "/how-it-works" ? "text-cyan-400 bg-gray-900" : "text-gray-300",
+              ]}
+            >
+              How It Works
             </a>
           </li>
         </ul>

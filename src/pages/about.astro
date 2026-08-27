@@ -101,6 +101,32 @@ import Base from "../layouts/Base.astro";
           The product is called <strong class="text-gray-200">HackFinder</strong> in the UI — short, punchy, and clean in a nav bar. The repo and subdomain use <strong class="text-gray-200">hackathon-finder</strong> — the full word helps with SEO (people search "hackathon finder", not "hackfinder") and makes the URL instantly clear to anyone who sees it. This is the same pattern real products use: a branded name for the interface, the descriptive name for discovery.
         </p>
       </div>
+
+      <!-- Deployment Gotchas -->
+      <div class="mt-8 rounded-lg border border-gray-800 bg-gray-900/50 p-6">
+        <h3 class="text-sm font-semibold text-gray-200">Deployment gotchas we hit</h3>
+        <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+          Building this was smooth until deployment. Here's what actually tripped us up — in case it saves you time:
+        </p>
+        <ul class="mt-4 space-y-3 text-sm text-gray-400">
+          <li class="flex gap-2">
+            <span class="text-red-400 shrink-0">●</span>
+            <span><strong class="text-gray-200">KV namespace conflict:</strong> The Astro Cloudflare adapter auto-provisions a "SESSION" KV namespace. If you deploy, delete, and redeploy, it fails because the namespace already exists. Fix: disable sessions with <code class="text-xs bg-gray-800 px-1.5 py-0.5 rounded">session: false</code> in astro.config.mjs.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-red-400 shrink-0">●</span>
+            <span><strong class="text-gray-200">D1 binding timing:</strong> The first Cloudflare deploy always fails because you can't add D1 bindings until after the project exists. It's a chicken-and-egg problem — deploy once (it fails), add the binding, then redeploy. This is expected.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-red-400 shrink-0">●</span>
+            <span><strong class="text-gray-200">Empty database ≠ broken:</strong> After a successful deploy, the site shows "Failed to load hackathons" — this looks like a bug but it's just an empty D1 database. You need to run the migration and trigger the aggregation worker separately.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-red-400 shrink-0">●</span>
+            <span><strong class="text-gray-200">database_id in wrangler.toml:</strong> The Cloudflare git integration's deploy step needs a valid database_id in wrangler.toml. A placeholder breaks the build. The ID is a read-only identifier (not a secret), so it's safe to commit.</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 

@@ -2,10 +2,12 @@ name = "hackathon-finder-aggregator"
 main = "index.ts"
 compatibility_date = "2024-09-23"
 
+# Note: The database_id below is a read-only resource identifier, not a secret.
+# For your own deployment, replace with the ID from: npx wrangler d1 create hackathon-discovery-db
 [[d1_databases]]
 binding = "DB"
 database_name = "hackathon-discovery-db"
-database_id = "<your-d1-database-id>"
+database_id = "7326f750-94fc-46fb-8bca-e386a2a9b353"
 
 [triggers]
 crons = ["0 * * * *"]

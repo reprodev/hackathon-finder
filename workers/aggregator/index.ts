@@ -1,3 +1,4 @@
+// Deployed via GitHub Action: .github/workflows/deploy-worker.yml
 /**
  * Aggregation Worker - Scheduled handler for the hackathon data pipeline.
  *

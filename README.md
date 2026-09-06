@@ -36,7 +36,7 @@ Built with [Kiro](https://kiro.dev) using a spec-driven workflow, deployed on Cl
 
 ## Prerequisites
 
-- **Node.js** 18+ (LTS recommended)
+- **Node.js** 24+ (LTS recommended)
 - **npm** 9+
 - **Wrangler CLI** (installed as a dev dependency, or globally via `npm install -g wrangler`)
 - **Cloudflare account** (free tier is sufficient)

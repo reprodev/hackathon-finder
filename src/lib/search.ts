@@ -97,6 +97,14 @@ export function buildFilterConditions(filters?: FilterCriteria): {
     params.push(...filters.tags);
   }
 
+  if (filters.status === 'active') {
+    conditions.push("(h.end_date IS NULL OR h.end_date >= date('now'))");
+  } else if (filters.status === 'ended') {
+    conditions.push("h.end_date IS NOT NULL");
+    conditions.push("h.end_date < date('now')");
+  }
+  // 'all' = no status condition
+
   return { conditions, params };
 }
 

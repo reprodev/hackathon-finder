@@ -59,11 +59,15 @@ export interface HackathonDetailResponse {
   data: HackathonDetail;
 }
 
+/** Status filter for hackathon queries */
+export type StatusFilter = 'active' | 'ended' | 'all';
+
 /** Filter criteria for hackathon queries */
 export interface FilterCriteria {
   dateRange?: { start: string; end: string };
   format?: Format[];
   tags?: string[];
+  status?: StatusFilter;
 }
 
 /** Pagination parameters for list queries */

@@ -172,6 +172,7 @@ function buildApiUrl(query: string, filters: FilterCriteria, page: number, sort:
     params.set('dateStart', filters.dateRange.start);
     params.set('dateEnd', filters.dateRange.end);
   }
+  params.set('status', filters.status ?? 'active');
 
   return `/api/hackathons?${params.toString()}`;
 }
@@ -191,7 +192,7 @@ export default function HackathonGrid({
 }: HackathonGridProps) {
   // State
   const [query, setQuery] = useState(initialQuery);
-  const [filters, setFilters] = useState<FilterCriteria>(initialFilters ?? {});
+  const [filters, setFilters] = useState<FilterCriteria>(initialFilters ?? { status: 'active' });
   const [sort, setSort] = useState<SortOption>('newest');
   const [hackathons, setHackathons] = useState<HackathonSummary[]>([]);
   const [page, setPage] = useState(1);

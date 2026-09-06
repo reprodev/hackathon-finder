@@ -9,7 +9,7 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import type { FilterCriteria, Format } from '../lib/types';
+import type { FilterCriteria, Format, StatusFilter } from '../lib/types';
 import { validateDateRange, getDateRangePreset, type DateRangePreset } from '../lib/filters';
 
 // ─── Props ────────────────────────────────────────────────────────────────────
@@ -222,17 +222,20 @@ export default function FilterPanel({
   const [activePreset, setActivePreset] = useState<DateRangePreset | null>(null);
   const [dateError, setDateError] = useState<string | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [status, setStatus] = useState<StatusFilter>(
+    initialFilters?.status ?? 'active'
+  );
 
   // Emit filter changes to parent
   const emitFilters = useCallback(
-    (formats: Format[], tags: string[], range?: { start: string; end: string }) => {
-      const filters: FilterCriteria = {};
+    (formats: Format[], tags: string[], range?: { start: string; end: string }, currentStatus: StatusFilter = status) => {
+      const filters: FilterCriteria = { status: currentStatus };
       if (formats.length > 0) filters.format = formats;
       if (tags.length > 0) filters.tags = tags;
       if (range) filters.dateRange = range;
       onFilterChange(filters);
     },
-    [onFilterChange]
+    [onFilterChange, status]
   );
 
   // Sync initial filters on mount
@@ -241,6 +244,7 @@ export default function FilterPanel({
       setSelectedFormats(initialFilters.format ?? []);
       setSelectedTags(initialFilters.tags ?? []);
       setDateRange(initialFilters.dateRange);
+      setStatus(initialFilters.status ?? 'active');
     }
   }, [initialFilters]);
 
@@ -301,6 +305,16 @@ export default function FilterPanel({
     emitFilters(selectedFormats, selectedTags, undefined);
   }, [selectedFormats, selectedTags, emitFilters]);
 
+  // ─── Status Handlers ─────────────────────────────────────────────────────
+
+  const handleStatusChange = useCallback(
+    (newStatus: StatusFilter) => {
+      setStatus(newStatus);
+      emitFilters(selectedFormats, selectedTags, dateRange, newStatus);
+    },
+    [selectedFormats, selectedTags, dateRange, emitFilters]
+  );
+
   // ─── Format Handlers ──────────────────────────────────────────────────────
 
   const handleFormatToggle = useCallback(
@@ -335,18 +349,20 @@ export default function FilterPanel({
     setDateRange(undefined);
     setActivePreset(null);
     setDateError(null);
-    onFilterChange({});
+    setStatus('active');
+    onFilterChange({ status: 'active' });
   }, [onFilterChange]);
 
   // ─── Computed ─────────────────────────────────────────────────────────────
 
   const hasActiveFilters =
-    selectedFormats.length > 0 || selectedTags.length > 0 || !!dateRange;
+    selectedFormats.length > 0 || selectedTags.length > 0 || !!dateRange || status !== 'active';
 
   const activeFilterCount =
     (selectedFormats.length > 0 ? 1 : 0) +
     (selectedTags.length > 0 ? 1 : 0) +
-    (dateRange ? 1 : 0);
+    (dateRange ? 1 : 0) +
+    (status !== 'active' ? 1 : 0);
 
   // ─── Render ───────────────────────────────────────────────────────────────
 
@@ -401,6 +417,34 @@ export default function FilterPanel({
             </button>
           )}
         </div>
+
+        {/* Status Section */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-gray-300">Status</h3>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { value: 'active' as StatusFilter, label: 'Active' },
+              { value: 'ended' as StatusFilter, label: 'Ended' },
+              { value: 'all' as StatusFilter, label: 'All' },
+            ].map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleStatusChange(option.value)}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                  status === option.value
+                    ? 'bg-cyan-500 text-white'
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Divider */}
+        <hr className="border-gray-800" />
 
         {/* Date Range Section */}
         <DateRangeFilter

@@ -19,7 +19,7 @@
 
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
-import type { FilterCriteria, PaginationParams, HackathonListResponse, Format } from '../../../lib/types';
+import type { FilterCriteria, PaginationParams, HackathonListResponse, Format, StatusFilter } from '../../../lib/types';
 import { searchHackathons, SearchQueryTooLongError, MAX_QUERY_LENGTH } from '../../../lib/search';
 import type { SortOption } from '../../../lib/search';
 import { validateDateRange } from '../../../lib/filters';
@@ -101,6 +101,16 @@ export const GET: APIRoute = async ({ request }) => {
     }
   }
 
+  // Parse and validate status parameter
+  const statusRaw = url.searchParams.get('status');
+  const VALID_STATUSES = new Set(['active', 'ended', 'all']);
+  let status: StatusFilter = 'active'; // DEFAULT to active
+  if (statusRaw && VALID_STATUSES.has(statusRaw)) {
+    status = statusRaw as StatusFilter;
+  } else if (statusRaw) {
+    errors.push(`Invalid status value: ${statusRaw}. Valid values: active, ended, all`);
+  }
+
   // Validate date range
   let dateRange: { start: string; end: string } | undefined;
   if (dateStart || dateEnd) {
@@ -139,15 +149,13 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   // --- Build filter criteria ---
-
-  const filters: FilterCriteria | undefined =
-    (formats || tags || dateRange)
-      ? {
-          ...(formats && { format: formats }),
-          ...(tags && { tags }),
-          ...(dateRange && { dateRange }),
-        }
-      : undefined;
+  // Always include status in filters (defaults to 'active')
+  const filters: FilterCriteria = {
+    status,
+    ...(formats && { format: formats }),
+    ...(tags && { tags }),
+    ...(dateRange && { dateRange }),
+  };
 
   const pagination: PaginationParams = { page, pageSize };
 

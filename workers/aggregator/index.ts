@@ -18,6 +18,9 @@ import { DevpostAdapter } from './adapters/devpost';
 import { MLHAdapter } from './adapters/mlh';
 import { HackerEarthAdapter } from './adapters/hackerearth';
 import { DoraHacksAdapter } from './adapters/dorahacks';
+import { DevfolioAdapter } from './adapters/devfolio';
+import { ETHGlobalAdapter } from './adapters/ethglobal';
+import { TensorHackAdapter } from './adapters/tensorhack';
 import type { EventSourceAdapter, RawHackathonEvent } from './adapters/interface';
 import { normalize, validate } from './normalizer';
 import type { NormalizedHackathon } from './normalizer';
@@ -34,6 +37,9 @@ export interface AggregatorEnv {
   SOURCE_MLH_ENABLED: string;
   SOURCE_HACKEREARTH_ENABLED: string;
   SOURCE_DORAHACKS_ENABLED: string;
+  SOURCE_DEVFOLIO_ENABLED: string;
+  SOURCE_ETHGLOBAL_ENABLED: string;
+  SOURCE_TENSORHACK_ENABLED: string;
 }
 
 /**
@@ -79,6 +85,9 @@ function createAdapters(env: AggregatorEnv): EventSourceAdapter[] {
   adapters.push(new MLHAdapter(envBool(env.SOURCE_MLH_ENABLED)));
   adapters.push(new HackerEarthAdapter(envBool(env.SOURCE_HACKEREARTH_ENABLED)));
   adapters.push(new DoraHacksAdapter(envBool(env.SOURCE_DORAHACKS_ENABLED)));
+  adapters.push(new DevfolioAdapter(envBool(env.SOURCE_DEVFOLIO_ENABLED)));
+  adapters.push(new ETHGlobalAdapter(envBool(env.SOURCE_ETHGLOBAL_ENABLED)));
+  adapters.push(new TensorHackAdapter(envBool(env.SOURCE_TENSORHACK_ENABLED)));
 
   return adapters.filter((adapter) => adapter.enabled);
 }
